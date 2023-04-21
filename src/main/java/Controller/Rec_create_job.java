@@ -41,36 +41,29 @@ Connection con = DBconnection.initializeDatabase();
 
 // Create a SQL query to insert data into demo table
 // demo table consists of two columns, so two '?' is used
-PreparedStatement st = con
-.prepareStatement("insert into rec_job values(?,?,?,?,?,?,?,?,?,?)");
+PreparedStatement st = con.prepareStatement("insert into rec_job values(?,?,?,?,?,?,?,?,?,?,?)");
 
-
-
-
-
+st.setString(1,request.getParameter("id"));
 int id = 0;
-st.setInt(1,id);
-
+st.setInt(2,id);
 
 InputStream inputStream = null;
-
 Part filePart = request.getPart("logo");
-       if (filePart != null) {
-           
-           inputStream = filePart.getInputStream();
+       if (filePart != null) {    
+          inputStream = filePart.getInputStream();
        }
        if (inputStream != null) {
                // fetches input stream of the upload file for the blob column
-               st.setBlob(2, inputStream);
+               st.setBlob(3, inputStream);
            }
-    st.setString(3,request.getParameter("email"));
-    st.setString(4,request.getParameter("job_title"));
-    st.setString(5,request.getParameter("address"));
-    st.setString(6,request.getParameter("job_type"));
-    st.setString(7,request.getParameter("category"));
-    st.setString(8,request.getParameter("des"));
-    st.setString(9,request.getParameter("company_name"));
-    st.setString(10,request.getParameter("website"));
+    st.setString(4,request.getParameter("email"));
+    st.setString(5,request.getParameter("job_title"));
+    st.setString(6,request.getParameter("address"));
+    st.setString(7,request.getParameter("job_type"));
+    st.setString(8,request.getParameter("category"));
+    st.setString(9,request.getParameter("des"));
+    st.setString(10,request.getParameter("company_name"));
+    st.setString(11,request.getParameter("website"));
     
    
      

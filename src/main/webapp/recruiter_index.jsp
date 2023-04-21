@@ -1,6 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-  
+      <%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="Util.DBconnection" %>
+<%@page import="javax.servlet.http.HttpSession"%>
+<%
+
+String name = request.getParameter("id");
+String driver = "com.mysql.cj.jdbc.Driver";
+String connectionUrl = "jdbc:mysql://localhost:3306/";
+String database = "pro";
+String userid = "root";
+String password = "root";
+try {
+Class.forName(driver);
+} catch (ClassNotFoundException e) {
+e.printStackTrace();
+}
+Connection con = null;
+Statement statement = null;
+ResultSet resultSet = null;
+%>  
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
@@ -88,18 +110,33 @@
 <div class="fullwidthbanner-container">
 	<div class="fullwidthbanner">
 		<ul>
+			<%
+try{
+con = DriverManager.getConnection(connectionUrl+database, userid, password);
+statement=con.createStatement();
+String sql ="select rec_name from rec_profile where id='" + session.getAttribute("id") + "'";
 
+resultSet = statement.executeQuery(sql);
+while(resultSet.next()){
+%>
 			<!-- Slide 1 -->
 			<li data-fstransition="fade" data-transition="fade" data-slotamount="10" data-masterspeed="300">
 				<img src="recruiter_look/images/banner-02.jpg" alt="">
 
 				<div class="caption title sfb" data-x="center" data-y="165" data-speed="400" data-start="800"  data-easing="easeOutExpo">
-					<p style="font-size:150px; color:white; margin-left:40px; ">Welcome</p>
+					<center><p style="font-size:150px; color:white; ">Welcome</p></center>
+					<center><p style="font-size:150px; color:white;  margin-top: 100px; "><%=resultSet.getString("rec_name") %></p></center>
 				</div>
 
 				
 			</li>
-
+<%
+}
+con.close();
+} catch (Exception e) {
+e.printStackTrace();
+}
+%>
 		</ul>
 	</div>
 </div>
@@ -107,9 +144,90 @@
 
 
 
+<!-- Footer
+================================================== -->
+<div class="margin-top-100"></div>
+
+<div id="footer">
+	<!-- Container -->
+<div class="container">
+
+	<div class="eleven columns">
+	
+		<h1 class="margin-bottom-15" style="color:white ;">Contact Us</h1>
+		
+			<!-- Contact Form -->
+			<section id="contact" class="padding-right">
+	
+				<!-- Success Message -->
+				<mark id="message"></mark>
+	
+				<!-- Form -->
+				<form method="post" name="contactform" id="contactform" action="Contactform">
+	
+					<fieldset>
+	
+						<div>
+							<label>Name:</label>
+							<input name="name" type="text" id="name" />
+						</div>
+	
+						<div>
+							<label >Email: <span>*</span></label>
+							<input name="email" type="email" id="email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" />
+						</div>
+	
+						<div>
+							<label>Message: <span>*</span></label>
+							<textarea name="comment" cols="40" rows="3" id="comment" spellcheck="true"></textarea>
+						</div>
+	
+					</fieldset>
+					<div id="result"></div>
+					<input type="submit" class="submit" id="submit" value="Send Message" />
+					<div class="clearfix"></div>
+					<div class="margin-bottom-40"></div>
+				</form>
+	
+			</section>
+			<!-- Contact Form / End -->
+	
+	</div>
+	<!-- Container / End -->
+	
+	
+	<!-- Sidebar
+	================================================== -->
+	<div class="five columns">
+	
+		<!-- Information -->
+		<h1 class="margin-bottom-10" style="color:white ;">Information</h1>
+		<div class="widget-box">
+		<h4>	<p style="color: rgb(120, 119, 119);">A skill base job hiring website</p>
+	
+			<ul class="contact-informations" style="color: rgb(120, 119, 119);">
+				<li>45 Park Avenue, Apt. 303</li>
+				<li>Kalol, 382721 </li>
+			</ul>
+	
+			<ul class="contact-informations second" style="color: rgb(120, 119, 119);">
+				<li><i class="fa fa-phone"></i> <p>+48 880 440 110</p></li>
+				<li><i class="fa fa-envelope"></i> <p>careerclub@contact.com</p></li>
+				<li><i class="fa fa-globe"></i> <p>www.careerclub.com</p></li>
+			</ul>
+		</h4>
+		</div>
+		
+		
+	
+	</div>
+	</div>
+		<!-- Container / End -->	
+
 <!-- Back To Top Button -->
 <div id="backtotop"><a href="#"></a></div>
 
+</div>
 </div>
 <!-- Wrapper / End -->
 
@@ -130,6 +248,11 @@
 <script src="recruiter_look/scripts/jquery.jpanelmenu.js"></script>
 <script src="recruiter_look/scripts/stacktable.js"></script>
 
+
+
+<!-- WYSIWYG Editor -->
+<script type="text/javascript" src="jobseeker/scripts/jquery.sceditor.bbcode.min.js"></script>
+<script type="text/javascript" src="jobseeker/scripts/jquery.sceditor.js"></script>
 
 
 </body>

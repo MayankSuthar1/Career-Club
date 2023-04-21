@@ -36,16 +36,25 @@ public class Jobseeker_login extends HttpServlet {
 			//checking whether the details of user are null or not
 			if (resultset.next()) {
 				//Storing the login details in session
-				hs.setAttribute("email", resultset.getString("email"));
-				//Redirecting response to the index.html
-				response.sendRedirect("index.html");	
+				hs.setAttribute("id", resultset.getString("id"));
+				//Redirecting response to the index.jsp
+				  if (resultset.getInt("login_time") == 0) {
+			            // Redirect to create profile page
+			            response.sendRedirect("jobseeker_create_profile.jsp");
+			            
+			           
+			         
+			        } else {
+			            // Redirect to home page
+			            response.sendRedirect("jobseeker_index.jsp");
+			        }
 			}
 			else {
 				//if wrong credentials are entered
 				String message = "you have enter worng credentials";
 				hs.setAttribute("credential", message);
-				//Redirecting response to the admin_login.html
-				response.sendRedirect("jobseeker_login_register.html");
+				//Redirecting response to the admin_login.jsp
+				response.sendRedirect("jobseeker_login_register.jsp");
 			}
 		}
 		catch(Exception e) {

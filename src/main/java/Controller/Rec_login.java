@@ -36,8 +36,8 @@ public class Rec_login extends HttpServlet {
 			//checking whether the details of user are null or not
 			if (resultset.next()) {
 				//Storing the login details in session
-				hs.setAttribute("email", resultset.getString("email"));
-				//Redirecting response to the index.html
+				hs.setAttribute("id", resultset.getString("id"));
+				//Redirecting response to the index.jsp
 				// Check if user has logged in before
 		        if (resultset.getInt("login_time") == 0) {
 		            // Redirect to create profile page
@@ -55,7 +55,7 @@ public class Rec_login extends HttpServlet {
 				//if wrong credentials are entered
 				String message = "you have enter worng credentials";
 				hs.setAttribute("credential", message);
-				//Redirecting response to the admin_login.html
+				//Redirecting response to the admin_login.jsp
 				response.sendRedirect("recruiter_login_register.jsp");
 			}
 		}

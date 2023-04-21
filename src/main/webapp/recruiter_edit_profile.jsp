@@ -59,7 +59,7 @@ ResultSet resultSet = null;
 
 		<!-- Logo -->
 		<div id="logo">
-			<h1><a href="#"><img src="recruiter_look/images/logo.png" alt="Career Club" /></a></h1>
+			<h1><a href="recruiter_index.jsp"><img src="recruiter_look/images/logo.png" alt="Career Club" /></a></h1>
 		</div>
 
 		
@@ -123,10 +123,11 @@ ResultSet resultSet = null;
                         
           <form method="post" name="rec_profile" id="rec_proflie" action="Rec_updateprofile_process.jsp">      	
 			<%
+			
 try{
 con = DriverManager.getConnection(connectionUrl+database, userid, password);
 statement=con.createStatement();
-String sql ="select * from rec_profile where company_email='" + session.getAttribute("email") + "'";
+String sql ="select * from rec_profile where id='" + session.getAttribute("id") + "'";
 
 resultSet = statement.executeQuery(sql);
 while(resultSet.next()){
@@ -179,7 +180,10 @@ while(resultSet.next()){
 
 			<div class="divider margin-top-0 padding-reset"></div>
 			<input type="submit" class="button big margin-top-5" id="submit" value="Update" name="update"/>
-			<input type="submit" class="button big margin-top-5" id="submit" value="Delete" name="delete"/>
+			<br />
+			<br />
+			
+			
 			
 			<%
 }
@@ -189,6 +193,41 @@ e.printStackTrace();
 }
 %>
 			</form>
+			
+		
+
+			<a href="#small-dialog" class="popup-with-zoom-anim button">Delete</a>
+			
+				<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup">
+				<form method="post" action="Rec_updateprofile_process.jsp">
+			<%
+			try{
+				con = DriverManager.getConnection(connectionUrl+database, userid, password);
+				statement=con.createStatement();
+				String sql ="select * from rec_profile where id='" + session.getAttribute("id") + "'";
+
+				resultSet = statement.executeQuery(sql);
+				while(resultSet.next()){
+				%>
+					<div class="small-dialog-headline">
+						<h2>Are you sure ?</h2>
+					</div>
+
+					<div class="small-dialog-content">
+			<input class="search-field" type="hidden"  value="<%=resultSet.getString("company_email") %>" name="com_email"/>
+							<input type="submit" class="button big margin-top-5" id="submit" value="Delete" name="delete"/>
+						
+					</div>
+					<%
+}
+con.close();
+} catch (Exception e) {
+e.printStackTrace();
+}
+%>
+			</form>
+				</div>
+				
 		</div>
 	</div>
 
@@ -204,24 +243,24 @@ e.printStackTrace();
 
 <!-- Scripts
 ================================================== -->
-<script src="jobseeker/scripts/jquery-2.1.3.min.js"></script>
-<script src="jobseeker/scripts/custom.js"></script>
-<script src="jobseeker/scripts/jquery.superfish.js"></script>
-<script src="jobseeker/scripts/jquery.themepunch.tools.min.js"></script>
-<script src="jobseeker/scripts/jquery.themepunch.revolution.min.js"></script>
-<script src="jobseeker/scripts/jquery.themepunch.showbizpro.min.js"></script>
-<script src="jobseeker/scripts/jquery.flexslider-min.js"></script>
-<script src="jobseeker/scripts/chosen.jquery.min.js"></script>
-<script src="jobseeker/scripts/jquery.magnific-popup.min.js"></script>
-<script src="jobseeker/scripts/waypoints.min.js"></script>
-<script src="jobseeker/scripts/jquery.counterup.min.js"></script>
-<script src="jobseeker/scripts/jquery.jpanelmenu.js"></script>
-<script src="jobseeker/scripts/stacktable.js"></script>
+<script src="recruiter_look/scripts/jquery-2.1.3.min.js"></script>
+<script src="recruiter_look/scripts/custom.js"></script>
+<script src="recruiter_look/scripts/jquery.superfish.js"></script>
+<script src="recruiter_look/scripts/jquery.themepunch.tools.min.js"></script>
+<script src="recruiter_look/scripts/jquery.themepunch.revolution.min.js"></script>
+<script src="recruiter_look/scripts/jquery.themepunch.showbizpro.min.js"></script>
+<script src="recruiter_look/scripts/jquery.flexslider-min.js"></script>
+<script src="recruiter_look/scripts/chosen.jquery.min.js"></script>
+<script src="recruiter_look/scripts/jquery.magnific-popup.min.js"></script>
+<script src="recruiter_look/scripts/waypoints.min.js"></script>
+<script src="recruiter_look/scripts/jquery.counterup.min.js"></script>
+<script src="recruiter_look/scripts/jquery.jpanelmenu.js"></script>
+<script src="recruiter_look/scripts/stacktable.js"></script>
 
 
 <!-- WYSIWYG Editor -->
-<script type="text/javascript" src="jobseeker/scripts/jquery.sceditor.bbcode.min.js"></script>
-<script type="text/javascript" src="jobseeker/scripts/jquery.sceditor.js"></script>
+<script type="text/javascript" src="recruiter_look/scripts/jquery.sceditor.bbcode.min.js"></script>
+<script type="text/javascript" src="recruiter_look/scripts/jquery.sceditor.js"></script>
 
 
 </body>

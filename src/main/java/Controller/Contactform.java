@@ -62,7 +62,7 @@ public class Contactform extends HttpServlet {
 			// Get a writer pointer
 			// to display the successful result
 			PrintWriter out = response.getWriter();
-			RequestDispatcher rd=request.getRequestDispatcher("index.html");  
+			RequestDispatcher rd=request.getRequestDispatcher("index.jsp");  
 			rd.forward(request, response);
 		}
 		catch (Exception e) {

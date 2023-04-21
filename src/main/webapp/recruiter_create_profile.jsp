@@ -110,7 +110,7 @@ ResultSet resultSet = null;
 try{
 con = DriverManager.getConnection(connectionUrl+database, userid, password);
 statement=con.createStatement();
-String sql ="select *from rec_reg where email='" + session.getAttribute("email") + "'";
+String sql ="select *from rec_reg where id='" + session.getAttribute("id") + "'";
 
 resultSet = statement.executeQuery(sql);
 while(resultSet.next()){

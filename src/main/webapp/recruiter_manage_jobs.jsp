@@ -1,5 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="Util.DBconnection" %>
+<%@page import="javax.servlet.http.HttpSession"%>
+<%@page import="java.sql.*"%>
+<%@page import="java.io.*"%>
+<%
+
+String name = request.getParameter("id");
+String driver = "com.mysql.cj.jdbc.Driver";
+String connectionUrl = "jdbc:mysql://localhost:3306/";
+String database = "pro";
+String userid = "root";
+String password = "root";
+try {
+Class.forName(driver);
+} catch (ClassNotFoundException e) {
+e.printStackTrace();
+}
+Connection con = null;
+Statement statement = null;
+ResultSet resultSet = null;
+%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
@@ -108,47 +133,59 @@
 
 			<tr>
 				<th><i class="fa fa-file-text"></i>Job Title</th>
-				
+				<th><i class="fa fa-file-text"></i>Options</th>
 				
 				
 			</tr>
+			</table>
 					
 			<!-- Item #1 -->
+			<%
+try{
+con = DriverManager.getConnection(connectionUrl+database, userid, password);
+statement=con.createStatement();
+String sql ="select * from rec_job where id='" + session.getAttribute("id") + "'";
+
+resultSet = statement.executeQuery(sql);
+
+while(resultSet.next()){
+
+	
+    
+%>
+			<form method="post" action="recruiter_edit_job.jsp">
+			<table class="manage-table responsive-table">
+
 			<tr>
-				<td class="title"><a href="#">Marketing Coordinator - SEO / SEM Experience </a></td>
+				<th></th>
+				<th></th>
 				
 				
-				<td class="action">
-				<a href="recruiter_edit_job.jsp"><i class="fa fa-pencil"></i> Edit</a>
-					<a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
-				</td>
 			</tr>
-					
-			<!-- Item #2 -->
+			
 			<tr>
-				<td class="title"><a href="#">Web Developer - Front End Web Development, Relational Databases</a></td>
+				<td class="title"><%=resultSet.getString("job_title") %><input name="job_id" type="hidden" value="<%=resultSet.getInt("job_id") %>"/></td>
 				
 				
 				<td class="action">
-					<a href="recruiter_edit_job.jsp"><i class="fa fa-pencil"></i> Edit</a>
+				
+				<button type="submit" name="edit" ><i class="fa fa-pencil"></i> Edit</button>
 					
-					<a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
 				</td>
-			</tr>	
-
-			<!-- Item #2 -->
-			<tr>
-				<td class="title"><a href="#">Power Systems User Experience Designer</a></td>
 				
-				
-				<td class="action">
-				<a href="#"><i class="fa fa-pencil"></i> Edit</a>
-					<a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
-				</td>
 			</tr>
+			</table>
+			</form>
+			<% 
+}
+con.close();
+} catch (Exception e) {
+e.printStackTrace();
+}
+%>
+			
 
-		</table>
-
+		
 		<br>
 		<a href="recruiter_create_job.jsp" class="button">Add Job</a>
 
@@ -157,6 +194,8 @@
 </div>
 
 
+<!-- Footer
+================================================== -->
 <div class="margin-top-100"></div>
 
 <div id="footer">
@@ -174,7 +213,7 @@
 				<mark id="message"></mark>
 	
 				<!-- Form -->
-				<form method="post" name="contactform" id="contactform">
+				<form method="post" name="contactform" id="contactform" action="Contactform">
 	
 					<fieldset>
 	
@@ -222,7 +261,7 @@
 			</ul>
 	
 			<ul class="contact-informations second" style="color: rgb(120, 119, 119);">
-				<li><i class="fa fa-phone"></i> <p>+91 880 440 110</p></li>
+				<li><i class="fa fa-phone"></i> <p>+48 880 440 110</p></li>
 				<li><i class="fa fa-envelope"></i> <p>careerclub@contact.com</p></li>
 				<li><i class="fa fa-globe"></i> <p>www.careerclub.com</p></li>
 			</ul>
@@ -233,34 +272,37 @@
 	
 	</div>
 	</div>
-	<!-- Container / End -->	
-	  </div>	
-
+		<!-- Container / End -->	
 
 <!-- Back To Top Button -->
 <div id="backtotop"><a href="#"></a></div>
 
+</div>
 </div>
 <!-- Wrapper / End -->
 
 
 <!-- Scripts
 ================================================== -->
-<script src="scripts/jquery-2.1.3.min.js"></script>
-<script src="scripts/custom.js"></script>
-<script src="scripts/jquery.superfish.js"></script>
-<script src="scripts/jquery.themepunch.tools.min.js"></script>
-<script src="scripts/jquery.themepunch.revolution.min.js"></script>
-<script src="scripts/jquery.themepunch.showbizpro.min.js"></script>
-<script src="scripts/jquery.flexslider-min.js"></script>
-<script src="scripts/chosen.jquery.min.js"></script>
-<script src="scripts/jquery.magnific-popup.min.js"></script>
-<script src="scripts/waypoints.min.js"></script>
-<script src="scripts/jquery.counterup.min.js"></script>
-<script src="scripts/jquery.jpanelmenu.js"></script>
-<script src="scripts/stacktable.js"></script>
-<script src="scripts/stacktable.js"></script>
+<script src="recruiter_look/scripts/jquery-2.1.3.min.js"></script>
+<script src="recruiter_look/scripts/custom.js"></script>
+<script src="recruiter_look/scripts/jquery.superfish.js"></script>
+<script src="recruiter_look/scripts/jquery.themepunch.tools.min.js"></script>
+<script src="recruiter_look/scripts/jquery.themepunch.revolution.min.js"></script>
+<script src="recruiter_look/scripts/jquery.themepunch.showbizpro.min.js"></script>
+<script src="recruiter_look/scripts/jquery.flexslider-min.js"></script>
+<script src="recruiter_look/scripts/chosen.jquery.min.js"></script>
+<script src="recruiter_look/scripts/jquery.magnific-popup.min.js"></script>
+<script src="recruiter_look/scripts/waypoints.min.js"></script>
+<script src="recruiter_look/scripts/jquery.counterup.min.js"></script>
+<script src="recruiter_look/scripts/jquery.jpanelmenu.js"></script>
+<script src="recruiter_look/scripts/stacktable.js"></script>
 
+
+
+<!-- WYSIWYG Editor -->
+<script type="text/javascript" src="jobseeker/scripts/jquery.sceditor.bbcode.min.js"></script>
+<script type="text/javascript" src="jobseeker/scripts/jquery.sceditor.js"></script>
 
 
 </body>

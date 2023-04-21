@@ -30,7 +30,7 @@ con = DriverManager.getConnection(url,user,psw);
 
 if (update != null) {
 	//for update
-	String sql="Update rec_profile set company_name=?,company_email=?,business_type=?,address=?,con_num=?,rec_name=? where company_email='" + session.getAttribute("email") + "'";
+	String sql="Update rec_profile set company_name=?,company_email=?,business_type=?,address=?,con_num=?,rec_name=? where id='" + session.getAttribute("id") + "'";
 	ps = con.prepareStatement(sql);
 
 	ps.setString(1, company_name);
@@ -50,19 +50,24 @@ if (update != null) {
 	{
 	out.print("There is a problem in updating Record.");
 	} 
-} else if (delete != null) {
+}
+else if (delete != null)
+{
     // code to delete data from the database
 	Statement st=con.createStatement();
-	String sql="DELETE rec_profile,rec_job,rec_reg FROM rec_profile JOIN rec_job ON rec_profile.company_email = rec_job.email JOIN rec_reg ON rec_profile.company_email = rec_reg.email WHERE company_email='" + session.getAttribute("email") + "'";
+	String sqli="Update rec_reg set login_time= 0 where id='" + session.getAttribute("id") + "'";
+	int j=st.executeUpdate(sqli);
+	String sql="DELETE FROM rec_profile WHERE id='" + session.getAttribute("id") + "'";
 	int i=st.executeUpdate(sql);
+	
 	if(i>0){
 	response.sendRedirect("recruiter_login_register.jsp");
 	}
 	else{
 		response.sendRedirect("recruiter_edit_profile.jsp");
 	}
+	
 }
-
 }
 catch(SQLException sql)
 {
@@ -70,4 +75,5 @@ request.setAttribute("error", sql);
 out.println(sql);
 }
 }
+
 %>

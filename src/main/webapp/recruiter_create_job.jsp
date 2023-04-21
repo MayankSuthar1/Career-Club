@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ 
+ 
+ <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
@@ -135,11 +137,13 @@ ResultSet resultSet = null;
 try{
 con = DriverManager.getConnection(connectionUrl+database, userid, password);
 statement=con.createStatement();
-String sql ="select * from rec_profile where company_email='" + session.getAttribute("email") + "'";
+String sql ="select * from rec_profile where id='" + session.getAttribute("id") + "'";
 
 resultSet = statement.executeQuery(sql);
 while(resultSet.next()){
 %>
+
+			<input type="hidden"  value="<%=resultSet.getString("id") %>" name="id"/>
 			<!-- Logo -->
 			<div class="form">
 				<h5>Logo </h5>

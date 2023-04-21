@@ -52,5 +52,8 @@
 	<classpathentry kind="lib" path="C:/tomcat 9/lib/websocket-api.jar"/>
 	<classpathentry kind="lib" path="C:/tomcat 9/bin/bootstrap.jar"/>
 	<classpathentry kind="lib" path="C:/tomcat 9/bin/tomcat-juli.jar"/>
+	<classpathentry kind="lib" path="D:/servle api/jaxb-ri-2.3.1.zip"/>
+	<classpathentry kind="lib" path="D:/servle api/jaxb-ri-2.3.1/jaxb-ri/mod/jaxb-api.jar"/>
+	<classpathentry kind="lib" path="D:/servle api/commons-fileupload-1.5.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -37,15 +37,15 @@ public class Admin_login extends HttpServlet {
 			if (resultset.next()) {
 				//Storing the login details in session
 				hs.setAttribute("uname", resultset.getString("username"));
-				//Redirecting response to the index.html
-				response.sendRedirect("admin_home.html");	
+				//Redirecting response to the index.jsp
+				response.sendRedirect("admin_home.jsp");	
 			}
 			else {
 				//if wrong credentials are entered
 				String message = "you have enter worng credentials";
 				hs.setAttribute("credential", message);
-				//Redirecting response to the admin_login.html
-				response.sendRedirect("admin_login.html");
+				//Redirecting response to the admin_login.jsp
+				response.sendRedirect("admin_login.jsp");
 			}
 		}
 		catch(Exception e) {

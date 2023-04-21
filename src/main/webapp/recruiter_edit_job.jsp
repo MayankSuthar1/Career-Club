@@ -8,6 +8,11 @@
 <%@page import="javax.servlet.http.HttpSession"%>
 <%@page import="java.sql.*"%>
 <%@page import="java.io.*"%>
+<%@page import="java.util.Base64"%>
+<%@page import="javax.imageio.*"%>
+<%@page import="java.awt.image.*"%>
+
+
 <%
 
 String name = request.getParameter("id");
@@ -16,6 +21,7 @@ String connectionUrl = "jdbc:mysql://localhost:3306/";
 String database = "pro";
 String userid = "root";
 String password = "root";
+String job_id = request.getParameter("job_id");
 try {
 Class.forName(driver);
 } catch (ClassNotFoundException e) {
@@ -24,6 +30,8 @@ e.printStackTrace();
 Connection con = null;
 Statement statement = null;
 ResultSet resultSet = null;
+byte[] imageData = null;
+
 %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -113,7 +121,7 @@ ResultSet resultSet = null;
 	<div class="container">
 
 		<div class="sixteen columns">
-			<h2><i class="fa fa-plus-circle"></i> Create Job</h2>
+			<h2><i class="fa fa-plus-circle"></i> Edit Job</h2>
 		</div>
 
 	</div>
@@ -132,31 +140,37 @@ ResultSet resultSet = null;
 
 			
 			
-		<form method="post" name="add_job" id="add_job" action="Rec_create_job" enctype="multipart/form-data">
+		<form method="post" name="add_job" id="add_job" action="Rec_edit_job" enctype="multipart/form-data" >
 		<%
 try{
 con = DriverManager.getConnection(connectionUrl+database, userid, password);
 statement=con.createStatement();
-String sql ="select * from rec_job where email='" + session.getAttribute("email") + "'";
+String sql ="select * from rec_job where id='" + session.getAttribute("id") + "' and job_id='" + job_id + "'";
 
 resultSet = statement.executeQuery(sql);
 
 while(resultSet.next()){
+	 Blob imageBlob = resultSet.getBlob("logo");
+	    if (imageBlob != null) {
+	    	//displaying the logo from the database
+	      imageData = imageBlob.getBytes(1, (int)imageBlob.length());
 
-       
-    
-%>
+	      // display the image using HTML
+	      out.println("<img src=\"data:image/jpeg;base64," + Base64.getEncoder().encodeToString(imageData) + "\" style=\"max-width: 250px; max-height: 250px;\" />");
+	    }    
+	%>
+    		<input  type="hidden"  value="<%=resultSet.getString("id") %>" name="id"/>
+    		<input  type="hidden"  value="<%=resultSet.getString("job_id") %>" name="job_id"/>
+			
 			<!-- Logo -->
 			<div class="form">
 				<h5>Logo </h5>
-				
-				<label class="upload-btn">
-				
+				<label class="upload-btn">				
 				    <input type="file" name="logo" id="logo" />
 				    <i class="fa fa-upload"></i> 
-				</label>
-				
+				</label>				
 			</div>
+			
 			<br/>
 			<br/>
 			<!-- Email -->
@@ -236,7 +250,7 @@ while(resultSet.next()){
 
 	
 			<div class="divider margin-top-0"></div>
-		<input type="submit" class="button big margin-top-5" id="submit" value="Submit" />
+		<input type="submit" class="button big margin-top-5" id="submit" name="submit"/>
 		<br />
 		<br />
 		<%
@@ -247,6 +261,39 @@ e.printStackTrace();
 }
 %>
 </form>
+
+<a href="#small-dialog" class="popup-with-zoom-anim button">Delete</a>
+			
+				<div id="small-dialog" class="zoom-anim-dialog mfp-hide apply-popup">
+				<form method="post" action="Rec_edit_job">
+			<%
+			try{
+				con = DriverManager.getConnection(connectionUrl+database, userid, password);
+				statement=con.createStatement();
+				String sql ="select * from rec_job where id='" + session.getAttribute("id") + "' and job_id='" + job_id + "'";
+
+				resultSet = statement.executeQuery(sql);
+				while(resultSet.next()){
+				%>
+					<div class="small-dialog-headline">
+						<h2>Are you sure ?</h2>
+					</div>
+
+					<div class="small-dialog-content">
+			<input class="search-field" type="hidden"  value="<%=resultSet.getString("id") %>" name="id"/>
+			<input  type="hidden"  value="<%= resultSet.getString("job_id")%>" name="job_id"/>
+							<input type="submit" class="button big margin-top-5" id="submit" value="Delete" name="delete"/>
+						
+					</div>
+					<%
+}
+con.close();
+} catch (Exception e) {
+e.printStackTrace();
+}
+%>
+			</form>
+		</div>
 		</div>
 	</div>
 
@@ -360,8 +407,8 @@ e.printStackTrace();
 
 
 <!-- WYSIWYG Editor -->
-<script type="text/javascript" src="jobseeker/scripts/jquery.sceditor.bbcode.min.js"></script>
-<script type="text/javascript" src="jobseeker/scripts/jquery.sceditor.js"></script>
+<script type="text/javascript" src="recruiter_look/scripts/jquery.sceditor.bbcode.min.js"></script>
+<script type="text/javascript" src="recruiter_look/scripts/jquery.sceditor.js"></script>
 
 
 </body>
