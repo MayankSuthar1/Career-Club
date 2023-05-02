@@ -1,3 +1,4 @@
+
 //selecting all required elements
 const start_btn = document.querySelector(".start_btn button");
 const info_box = document.querySelector(".info_box");
@@ -87,27 +88,45 @@ next_btn.onclick = ()=>{
         showResult(); //calling showResult function
     }
 }
+// Establish a connection to the MySQL database
+const mysql = require('mysql');
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'username',
+  password: 'password',
+  database: 'database_name'
+});
 
-// getting questions and options from array
-function showQuetions(index){
-    const que_text = document.querySelector(".que_text");
+// Retrieve the multiple choice questions from the database
+connection.query('SELECT * FROM mcq_questions', (error, results) => {
+  if (error) {
+    throw error;
+  }
+  
+  // Loop through the results and display each question and its choices
+  const questionContainer = document.getElementById('question-container');
+  for (let i = 0; i < results.length; i++) {
+    const question = results[i].question;
+    const choice1 = results[i].choice1;
+    const choice2 = results[i].choice2;
+    const choice3 = results[i].choice3;
+    const choice4 = results[i].choice4;
 
-    //creating a new span and div tag for question and option and passing the value using array index
-    let que_tag = '<span>'+ questions[index].numb + ". " + questions[index].question +'</span>';
-    let option_tag = '<div class="option"><span>'+ questions[index].options[0] +'</span></div>'
-    + '<div class="option"><span>'+ questions[index].options[1] +'</span></div>'
-    + '<div class="option"><span>'+ questions[index].options[2] +'</span></div>'
-    + '<div class="option"><span>'+ questions[index].options[3] +'</span></div>';
-    que_text.innerHTML = que_tag; //adding new span tag inside que_tag
-    option_list.innerHTML = option_tag; //adding new div tag inside option_tag
-    
-    const option = option_list.querySelectorAll(".option");
+    const questionElement = document.createElement('div');
+    questionElement.innerHTML = `
+      <p>${question}</p>
+      <ul>
+        <li>${choice1}</li>
+        <li>${choice2}</li>
+        <li>${choice3}</li>
+        <li>${choice4}</li>
+      </ul>
+    `;
+    questionContainer.appendChild(questionElement);
+  }
+});
 
-    // set onclick attribute to all available options
-    for(i=0; i < option.length; i++){
-        option[i].setAttribute("onclick", "optionSelected(this)");
-    }
-}
+
 // creating the new div tags which for icons
 let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
 let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';

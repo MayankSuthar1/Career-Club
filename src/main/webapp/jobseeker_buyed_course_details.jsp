@@ -1,5 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="Util.DBconnection" %>
+<%@page import="javax.servlet.http.HttpSession"%>
+<%@page import="java.sql.*"%>
+<%@page import="java.io.*"%>
+<%@page import="java.util.Base64"%>
+<%@page import="javax.imageio.*"%>
+<%@page import="java.awt.image.*"%>
+<%
+
+String name = request.getParameter("id");
+String driver = "com.mysql.cj.jdbc.Driver";
+String connectionUrl = "jdbc:mysql://localhost:3306/";
+String database = "pro";
+String userid = "root";
+String password = "root";
+try {
+Class.forName(driver);
+} catch (ClassNotFoundException e) {
+e.printStackTrace();
+}
+Connection con = null;
+Statement statement = null;
+ResultSet resultSet = null;
+byte[] imageData = null;
+String course_id = request.getParameter("course_id");
+%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
@@ -37,7 +67,7 @@
 
 		<!-- Logo -->
 		<div id="logo">
-			<h1><a href="jobseeker_index.html"><img src="jobseeker_look/images/logo.png" alt="Career Club" /></a></h1>
+			<h1><a href="jobseeker_index.jsp"><img src="jobseeker_look/images/logo.png" alt="Career Club" /></a></h1>
 		</div>
 
 		<!-- Menu -->
@@ -49,35 +79,34 @@
 				
 				<li><a>Skill Test</a>
 					<ul>
-						<li><a href="jobseeker_test_find_page.html">Choose Test</a></li>
+						<li><a href="jobseeker_test_find_page.jsp">Choose Test</a></li>
 						
 					</ul>
 				</li>
 					
-				</li>
+		
 				<li><a>Course</a>
 					<ul>
-						<li><a href="jobseeker_course.html">Buy a Course</a></li>
-						<li><a href="jobseeker_buyed_course.html">Your Courses</a></li>
+						<li><a href="jobseeker_course.jsp">Buy a Course</a></li>
+						<li><a href="jobseeker_buyed_course.jsp">Your Courses</a></li>
 						
 					</ul>
 					
 				</li>
 				<li><a>Profile</a>
 					<ul>
-						<li><a href="jobseeker_create_profile.html">Create Profile</a></li>
-						<li><a href="jobseeker_profile_manage.html">Edit Profile</a></li>
-						<li><a href="jobseeker_profile_manage.html">Delete Profile</a></li>
+						<li><a href="jobseeker_edit_profile.jsp">Edit Profile</a></li>
+						
 					</ul>
 					
 				</li>
-				
+
 				
 			</ul>
 			
 		<!-- Logout -->
 			<ul class="responsive float-right">
-				<li><a href="index.html">Logout</a></li>
+				<li><a href="logout.jsp">Logout</a></li>
 			</ul>
 
 
@@ -101,7 +130,25 @@
 <div id="titlebar">
 	<div class="container">
 		<div class="ten columns">
-			<h1>Courses</h1>
+		<%
+			
+try{
+con = DriverManager.getConnection(connectionUrl+database, userid, password);
+statement=con.createStatement();
+String sql ="select * from jobseeker_buyed_course where course_id='" + course_id + "'";
+
+resultSet = statement.executeQuery(sql);
+while(resultSet.next()){
+%>
+			<span><a href="jobseeker_buyed_course.jsp"><%= resultSet.getString("course_name") %></a></span>
+			<h2><%= resultSet.getString("course_name") %></h2>
+		<%
+}
+con.close();
+} catch (Exception e) {
+e.printStackTrace();
+}
+%>
 		</div>
 
 		
@@ -113,58 +160,62 @@
 <!-- Content
 ================================================== -->
 <div class="container">
+	<%
+			
+try{
+con = DriverManager.getConnection(connectionUrl+database, userid, password);
+statement=con.createStatement();
+String sql ="select * from jobseeker_buyed_course where id='" + course_id + "'";
+
+resultSet = statement.executeQuery(sql);
+while(resultSet.next()){
+%>
 	<!-- Recent Jobs -->
 	<div class="eleven columns">
 	<div class="padding-right">
 		
-		<form action="#" method="get" class="list-search">
-			<button><i class="fa fa-search"></i></button>
-			<input type="text" placeholder="Course name" value=""/>
+		<!-- Company Info -->
+		<div class="company-info">
+			<% Blob imageBlob = resultSet.getBlob("logo");
+				    if (imageBlob != null) {
+				    	//displaying the logo from the database
+				      imageData = imageBlob.getBytes(1, (int)imageBlob.length());
+
+				      // display the image using HTML
+				      out.println("<img src=\"data:image/jpeg;base64," + Base64.getEncoder().encodeToString(imageData) + "\" style=\"max-width: 250px; max-height: 250px;\"/>");
+				    }%>
+			<div class="content">
+				<h4><%= resultSet.getString("course_name") %></h4>
+				
+			</div>
 			<div class="clearfix"></div>
-		</form>
-
-		<ul class="job-list full">
-
-			
-
-			<li><a href="jobseeker_course_details.html">
-				<img src="jobseeker_look/images/job-list-logo-03.png" alt="">
-				<div class="job-list-content">
-					<h4>Full-stack web developer</h4>
-					
-					<p>In this course you will learn Full-Stack web development from scratch</p>
-				</div>
-				</a>
-				<div class="clearfix"></div>
-			</li>
-
-			
-		</ul>
-		<div class="clearfix"></div>
-
-		<div class="pagination-container">
-			<nav class="pagination">
-				<ul>
-					<li><a href="#" class="current-page">1</a></li>
-					
-				</ul>
-			</nav>
-
-			<nav class="pagination-next-prev">
-				<ul>
-					<li><a href="#" class="prev">Previous</a></li>
-					<li><a href="#" class="next">Next</a></li>
-				</ul>
-			</nav>
 		</div>
 
-	</div>
-	</div>
-
-
 	
+			<iframe width="1280" height="720" src="<%= resultSet.getString("video_link") %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+		
+		
+
+	</div>
+	</div>
 
 
+	<!-- Widgets -->
+	<div class="five columns">
+
+		<!-- Sort by -->
+		
+
+	</div>
+	<!-- Widgets / End -->
+
+<%
+}
+con.close();
+} catch (Exception e) {
+e.printStackTrace();
+}
+%>
 </div>
 
 

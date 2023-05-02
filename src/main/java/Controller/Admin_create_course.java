@@ -29,9 +29,9 @@ import Util.DBconnection;
 /**
  * Servlet implementation class profile_rec
  */
-@WebServlet("/Jobseeker_create_profile")
+@WebServlet("/Admin_create_course")
 @MultipartConfig(maxFileSize = 1617721555)
-public class Jobseeker_create_profile extends HttpServlet {
+public class Admin_create_course extends HttpServlet {
 private static final long serialVersionUID = 1L;
 protected void doPost(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException
 {
@@ -43,32 +43,33 @@ Connection con = DBconnection.initializeDatabase();
 
 // Create a SQL query to insert data into demo table
 
-PreparedStatement st = con.prepareStatement("insert into jobseeker_profile values(?,?,?,?,?,?,?,?,?)");
+PreparedStatement st = con.prepareStatement("insert into admin_course values(?,?,?,?,?,?)");
 
-String id = (String) session.getAttribute("id");
-int admin_checked = 0 ;
-st.setString(1,id);
-st.setString(2,request.getParameter("name"));
-st.setString(3,request.getParameter("email"));
-st.setString(4,request.getParameter("num"));
-st.setString(5,request.getParameter("skills"));
-st.setString(6,request.getParameter("location"));
-st.setString(7,request.getParameter("your_self"));
+int id = 0 ;
+st.setInt(1,id);
 InputStream inputStream = null;
-Part filePart = request.getPart("photo");
+Part filePart = request.getPart("logo");
        if (filePart != null) {    
           inputStream = filePart.getInputStream();
        }
        if (inputStream != null) {
                // fetches input stream of the upload file for the blob column
-               st.setBlob(8, inputStream);
+               st.setBlob(2, inputStream);
            }
-st.setInt(9,admin_checked); 
-st.executeUpdate();
+st.setString(3,request.getParameter("course_name"));
+st.setString(4,request.getParameter("category"));
+st.setString(5,request.getParameter("des"));
+st.setString(6,request.getParameter("vlink"));
 
-Statement stmt = con.createStatement();
-String sql ="Update jobseeker_reg set login_time=1 where email='" + id + "'";
-stmt.executeUpdate(sql);
+int i=st.executeUpdate();
+
+if(i>0){
+	response.sendRedirect("admin_manage_course.jsp");
+}
+else{
+	response.sendRedirect("admin_create_course.jsp");
+}
+
 // Close all the connections
 st.close();
 con.close();

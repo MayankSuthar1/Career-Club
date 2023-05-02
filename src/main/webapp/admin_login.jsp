@@ -9,7 +9,7 @@
 ================================================== -->
 <meta charset="utf-8">
 <title>Career club</title>
-
+<link rel="icon" type="image/png" sizes="16x16" href="admin_look/images/logo.png">
 <!-- Mobile Specific Metas
 ================================================== -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -37,7 +37,7 @@
 
 		<!-- Logo -->
 		<div id="logo">
-			<h1><a href="admin_login.html"><img src="admin_look/images/logo.png" alt="Careerclub" /></a></h1>
+			<h1><a href="admin_login.jsp"><img src="admin_look/images/logo.png" alt="Careerclub" /></a></h1>
 		</div>
 
 		
@@ -86,7 +86,7 @@
 					<p class="form-row">
 					<input type="submit" class="button" name="login" value="Login" />	
 
-						<label for="rememberme" class="rememberme">
+						
 						
 					</p>
 

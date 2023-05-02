@@ -131,7 +131,7 @@ while(resultSet.next()){
 			<div class="form">
 				<h5>Business type</h5>
 				
- 				 <select name="business" id="business">
+ 				 <select class="chosen-select" name="business" id="business">
   					  <option value="Web development">Web development</option>
  					  <option value="Software development">Software development</option>
   					  <option value="Application development">Application development</option>

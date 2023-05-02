@@ -122,7 +122,7 @@
 							<input type="email" class="input-text" name="email" id="reg_email" value="" />
 						</p>
 
-						
+							
 						<p class="form-row form-row-wide">
 							<label for="reg_password">Password:</label>
 							<input type="password" class="input-text" name="password" id="reg_password" />

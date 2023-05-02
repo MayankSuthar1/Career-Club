@@ -8,8 +8,8 @@
 <!-- Basic Page Needs
 ================================================== -->
 <meta charset="utf-8">
-<title>Careerclub</title>
-
+<title>Career club</title>
+<link rel="icon" href="admin_look/images/tab.png">
 <!-- Mobile Specific Metas
 ================================================== -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -37,7 +37,7 @@
 		
 			<!-- Logo -->
 			<div id="logo">
-				<h1><a href="admin_home.html"><img src="admin_look/images/logo.png" alt="Careerclub" /></a></h1>
+				<h1><a href="admin_home.jsp"><img src="admin_look/images/logo.png" alt="Careerclub" /></a></h1>
 			</div>
 	
 			<!-- Menu -->
@@ -45,33 +45,33 @@
 	<ul id="responsive">
 
 	
-		<li><a>Courses</a>
+		<li><a>Courses<i class="fa fa-arrow-circle-right"></i></a>
 			<ul>
-			<li><a href="admin_create_course.html">Create course</a></li>
-		<li><a href="admin_manage_course.html">Edit course</a></li>
+			<li><a href="admin_create_course.jsp">Create course</a></li>
+		<li><a href="admin_manage_course.jsp">Manage course</a></li>
 		
 			</ul>
 		</li>
 		<li><a href="#">Tests</a>
 			<ul>
-				<li><a href="admin_create_test.html">Create test</a></li>
-				<li><a href="admin_edit_test.html">Edit test</a></li>
+				<li><a href="admin_create_test.jsp">Create test</a></li>
+				<li><a href="admin_edit_test.jsp">Manage test</a></li>
 				
 				
 			</ul>
 		</li>
-		<li><a href="#">Getdetails</a>
+		<li><a href="#">Get details</a>
 			<ul>
-				<li><a href="admin_recruiter_details.html">Recruiter</a></li>
-				<li><a href="admin_jobseeker_details.html">Job Seeker</a></li>
-				
+				<li><a href="admin_jobseeker_details.jsp">Job Seeker</a></li>
+				<li><a href="admin_recruiter_details.jsp">Recruiter</a></li>
+				<li><a href="admin_recruiter_jobs_details.jsp">Recruiter Jobs</a></li>	
 			</ul>
 		</li>
 	
 		</ul>
 					<!-- Logout -->
 				<ul class="responsive float-right">
-					<li><a href="admin_login.html">Logout</a></li>
+					<li><a href="admin_login.jsp">Logout</a></li>
 				</ul>
 			</nav>	
 				<!-- Navigation -->
@@ -107,36 +107,36 @@
 		<div class="submit-page">
 
 			<!-- Notice -->
-			
+			<form method = "post" action="Admin_create_course" enctype="multipart/form-data">
 			<div class="form">
 				<h5>Logo <span></span></h5>
 				<label class="upload-btn">
-				    <input type="file" multiple />
-				    <i class="fa fa-upload"></i> Browse
+				    <input type="file" name = "logo" id="logo" />
+				    <i class="fa fa-upload"></i> 
 				</label>
-				<span class="fake-input">No file selected</span>
 			</div>
-
+			<br />
+			<br />
 			<!-- coursename -->
 			<div class="form">
-				<h5>Coursename</h5>
-				<input class="search-field" type="text"   value=""/>
+				<h5>Course name</h5>
+				<input class="search-field" type="text" name = "course_name"  value=""/>
 			</div>
 
 
 			<!-- Choose Category -->
 			<div class="form">
 				<div class="select">
-					<h5>course Category</h5>
-					<select data-placeholder="Choose Categories" class="chosen-select" multiple>
-						<option value="1">Web Developers</option>
-						<option value="2">Mobile Developers</option>
-						<option value="3">Designers & Creatives</option>
-						<option value="4">Writers</option>
-						<option value="5">Virtual Assistants</option>
-						<option value="6">Customer Service Agents</option>
-						<option value="7">Sales & Marketing Experts</option>
-						<option value="8">Accountants & Consultants</option>
+					<h5>Course Category</h5>
+					<select data-placeholder="Choose Categories" class="chosen-select" name="category">
+						<option value="Web Developers">Web Developers</option>
+						<option value="Mobile Developers">Mobile Developers</option>
+						<option value="Designers & Creatives">Designers & Creatives</option>
+						<option value="Writers">Writers</option>
+						<option value="Virtual Assistants">Virtual Assistants</option>
+						<option value="Customer Service Agents">Customer Service Agents</option>
+						<option value="Sales & Marketing Experts">Sales & Marketing Experts</option>
+						<option value="Accountants & Consultants">Accountants & Consultants</option>
 					</select>
 				</div>
 			</div>
@@ -147,7 +147,7 @@
 			<!-- Course Description -->
 			<div class="form">
 				<h5>Course Description</h5>
-				<textarea class="WYSIWYG" name="summary" cols="40" rows="3" id="summary" spellcheck="true"></textarea>
+				<textarea class="WYSIWYG" name="des" cols="40" rows="3" id="summary" spellcheck="true"></textarea>
 			</div>
 
 
@@ -155,14 +155,15 @@
 			<!-- Course video link -->
 			<div class="form">
 				<h5>Course video link</h5>
-				<input class="search-field" type="text"   value=""/>
+				<input class="search-field" type="text"  name = "vlink" value=""/>
 			</div>
 			
 
 
 			<div class="divider margin-top-0"></div>
-			<a href="#" class="button big margin-top-5"> Create<i class="fa fa-arrow-circle-right"></i></a>
-
+			
+			<button class="button big margin-top-5" type="submit" name="submit" value="Create">Create<i class="fa fa-arrow-circle-right"></i></button>
+			</form>
 
 		</div>
 	</div>

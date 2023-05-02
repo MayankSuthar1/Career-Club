@@ -1,5 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+   <%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="Util.DBconnection" %>
+<%@page import="javax.servlet.http.HttpSession"%>
+<%@page import="java.sql.*"%>
+<%@page import="java.io.*"%>
+<%@page import="java.util.Base64"%>
+<%@page import="javax.imageio.*"%>
+<%@page import="java.awt.image.*"%>
+
+<%
+
+String name = request.getParameter("id");
+String driver = "com.mysql.cj.jdbc.Driver";
+String connectionUrl = "jdbc:mysql://localhost:3306/";
+String database = "pro";
+String userid = "root";
+String password = "root";
+try {
+Class.forName(driver);
+} catch (ClassNotFoundException e) {
+e.printStackTrace();
+}
+Connection con = null;
+Statement statement = null;
+ResultSet resultSet = null;
+
+
+%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
@@ -9,7 +40,7 @@
 ================================================== -->
 <meta charset="utf-8">
 <title>Career club</title>
-
+<link rel="icon" href="admin_look/images/tab.png">
 <!-- Mobile Specific Metas
 ================================================== -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -26,6 +57,8 @@
 </head>
 
 <body>
+
+	
 <div id="wrapper">
 
 
@@ -34,13 +67,12 @@
 <header>
 <div class="container">
 	<div class="sixteen columns">
-
+	
 		<!-- Logo -->
 		<div id="logo">
-			<h1><a href="admin_home.html"><img src="admin_look/images/logo.png" alt="Careerclub" /></a></h1>
+			<h1><a href="admin_home.jsp"><img src="admin_look/images/logo.png" alt="Career club" /></a></h1>
 		</div>
 
-		
 		<!-- Menu -->
 <nav id="navigation" class="menu">
 	<ul id="responsive">
@@ -48,32 +80,34 @@
 	
 		<li><a>Courses</a>
 			<ul>
-			<li><a href="admin_create_course.html">Create course</a></li>
-		<li><a href="admin_manage_course.html">Edit course</a></li>
+			<li><a href="admin_create_course.jsp">Create course</a></li>
+		<li><a href="admin_manage_course.jsp">Manage course</a></li>
 		
 			</ul>
 		</li>
 		<li><a href="#">Tests</a>
 			<ul>
-				<li><a href="admin_create_test.html">Create test</a></li>
-				<li><a href="admin_edit_test.html">Edit test</a></li>
+				<li><a href="admin_create_test.jsp">Create test</a></li>
+				<li><a href="admin_edit_test.jsp">Manage test</a></li>
 				
 				
 			</ul>
 		</li>
-		<li><a href="#">Getdetails</a>
+		<li><a href="#">Get details</a>
 			<ul>
-				<li><a href="admin_recruiter_details.html">Recruiter</a></li>
-				<li><a href="admin_jobseeker_details.html">Job Seeker</a></li>
-				
+				<li><a href="admin_jobseeker_details.jsp">Job Seeker</a></li>
+				<li><a href="admin_recruiter_details.jsp">Recruiter</a></li>
+				<li><a href="admin_recruiter_jobs_details.jsp">Recruiter Jobs</a></li>	
 			</ul>
 		</li>
+		
+		
 		
 	
 	</ul>
 		<!-- Logout -->
 		<ul class="responsive float-right">
-			<li><a href="admin_login.html">Logout</a></li>
+			<li><a href="admin_login.jsp">Logout</a></li>
 		</ul>
 	</nav>
 		<!-- Navigation -->
@@ -93,7 +127,7 @@
 	<div class="container">
 
 		<div class="sixteen columns">
-			<h2>Manage Courses</h2>
+			<h2>Recruiter details</h2>
 			<nav id="breadcrumbs">
 				
 			</nav>
@@ -115,48 +149,52 @@
 		<table class="manage-table responsive-table">
 
 			<tr>
-				<th><i class="fa fa-file-text"></i> Title</th>
+				<th ><i class=""></i> Company Name</th>
+				<th><i class=""></i> Company Email</th>
+				<th><i class=""></i> Business</th>
+				<th><i class=""></i> Address</th>
+				<th><i class=""></i> Contact No.</th>
+				<th><i class=""></i> Recruiter Name</th>
+			</tr>
+					
+			<!-- Profile -->
+					<%
+try{
+con = DriverManager.getConnection(connectionUrl+database, userid, password);
+statement=con.createStatement();
+String sql ="select * from rec_profile where admin_checked =0 ";
+
+resultSet = statement.executeQuery(sql);
+
+while(resultSet.next()){
+
+	
+    
+%>
+					<tr>
+											
+						<td class="centered"><%= resultSet.getString("company_name")%></td>
+						<td class="centered"><%= resultSet.getString("company_email")%></td>
+						<td class="centered"><%= resultSet.getString("business_type")%></td>
+						<td class="centered"><%= resultSet.getString("address")%></td>
+						<td class="centered"><%= resultSet.getString("con_num")%></td>
+						<td class="centered"><p><%= resultSet.getString("rec_name")%></p></td>
+						
+						
+						<td class="action"><a href="admin_rec_js_ok_delete_process.jsp?id=<%= resultSet.getString("id")%>&rec_ok=ok"><i class="fa fa-pencil"></i>Ok</a>
+						<a	href="admin_rec_js_ok_delete_process.jsp?id=<%= resultSet.getString("id")%>&rec_delete=ok" class="delete"><i class="fa fa-remove"></i> Delete</a></td>
 				
-				<th><i class="fa fa-calendar"></i> Date Posted</th>
-			
-				<th><i class="fa fa-user"></i>Options</th>
-				<th></th>
-			</tr>
-					
-			<!-- Item #1 -->
-			<tr>
-				<td class="title"><a href="#">Marketing Coordinator - SEO / SEM Experience <span class="pending">(Pending Approval)</span></a></td>				
-				<td>September 30, 2015</td>	
-				<td class="action">
-					<a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
-					<a href="#"><i class="fa fa-pencil"></i> Edit</a>
-				</td>
-			</tr>
-					
-			<!-- Item #2 -->
-			<tr>
-				<td class="title"><a href="#">Web Developer - Front End Web Development, Relational Databases</a></td>
-				<td>September 30, 2015</td>	
-				<td class="action">
-					<a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
-					<a href="#"><i class="fa fa-pencil"></i> Edit</a>
-				</td>
-			</tr>	
-
-			<!-- Item #2 -->
-			<tr>
-				<td class="title"><a href="#">Power Systems User Experience Designer</a></td>
-				<td>September 30, 2015</td>	
-				<td class="action">
-					<a href="#" class="delete"><i class="fa fa-remove"></i> Delete</a>
-					<a href="#"><i class="fa fa-pencil"></i> Edit</a>
-				</td>
-			</tr>
-
+					</tr>
+				<% 
+}
+con.close();
+} catch (Exception e) {
+e.printStackTrace();
+}
+%>
 		</table>
 
-		<br>
-		<a href="admin_create_course.html" class="button">Add Course</a>
+		
 
 	</div>
 
@@ -164,8 +202,6 @@
 
 
 <div class="margin-top-100"></div>
-
-	
 
 
 <!-- Back To Top Button -->
@@ -190,8 +226,6 @@
 <script src="admin_look/scripts/jquery.counterup.min.js"></script>
 <script src="admin_look/scripts/jquery.jpanelmenu.js"></script>
 <script src="admin_look/scripts/stacktable.js"></script>
-<script src="admin_look/scripts/stacktable.js"></script>
-
 
 
 </body>

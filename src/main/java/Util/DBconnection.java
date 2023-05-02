@@ -31,7 +31,7 @@ public static ResultSet getResultFormSqlQuery(String SqlQueryString) {
 		if (con == null) {
 			initializeDatabase();
 		}
-		rs=con.createStatement().executeQuery(SqlQueryString);
+		rs =con.createStatement().executeQuery(SqlQueryString);
 	} catch (Exception ex) {
 		ex.printStackTrace();
 		}

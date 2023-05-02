@@ -9,7 +9,7 @@
 ================================================== -->
 <meta charset="utf-8">
 <title>Career club</title>
-
+<link rel="icon" href="admin_look/images/tab.png">
 <!-- Mobile Specific Metas
 ================================================== -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -39,7 +39,7 @@
 	
 		<!-- Logo -->
 		<div id="logo">
-			<h1><a href="admin_home.html"><img src="admin_look/images/logo.png" alt="Career club" /></a></h1>
+			<h1><a href="admin_home.jsp"><img src="admin_look/images/logo.png" alt="Career club" /></a></h1>
 		</div>
 
 		<!-- Menu -->
@@ -49,24 +49,24 @@
 	
 		<li><a>Courses</a>
 			<ul>
-			<li><a href="admin_create_course.html">Create course</a></li>
-		<li><a href="admin_manage_course.html">Edit course</a></li>
+			<li><a href="admin_create_course.jsp">Create course</a></li>
+		<li><a href="admin_manage_course.jsp">Manage course</a></li>
 		
 			</ul>
 		</li>
 		<li><a href="#">Tests</a>
 			<ul>
-				<li><a href="admin_create_test.html">Create test</a></li>
-				<li><a href="admin_edit_test.html">Edit test</a></li>
+				<li><a href="admin_create_test.jsp">Create test</a></li>
+				<li><a href="admin_edit_test.jsp">Manage test</a></li>
 				
 				
 			</ul>
 		</li>
-		<li><a href="#">Getdetails</a>
+		<li><a href="#">Get details</a>
 			<ul>
-				<li><a href="admin_recruiter_details.html">Recruiter</a></li>
-				<li><a href="admin_jobseeker_details.html">Job Seeker</a></li>
-				
+				<li><a href="admin_jobseeker_details.jsp">Job Seeker</a></li>
+				<li><a href="admin_recruiter_details.jsp">Recruiter</a></li>
+				<li><a href="admin_recruiter_jobs_details.jsp">Recruiter Jobs</a></li>	
 			</ul>
 		</li>
 		
@@ -75,9 +75,11 @@
 	
 	</ul>
 		<!-- Logout -->
+		
 		<ul class="responsive float-right">
-			<li><a href="admin_login.html">Logout</a></li>
+			<li><a href="logout.jsp">Logout</a></li>
 		</ul>
+		
 	</nav>
 
 		<!-- Navigation -->

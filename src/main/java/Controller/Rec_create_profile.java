@@ -1,20 +1,26 @@
 package Controller;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+import javax.servlet.*;
 
-// Import Database Connection Class file
-import java.sql.*;
 import Util.DBconnection;
 
 /**
@@ -28,6 +34,7 @@ public class Rec_create_profile extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request,HttpServletResponse response)	throws ServletException, IOException
 	{
+		HttpSession session = request.getSession();
 		try {
 
 			// Initialize the database
@@ -35,22 +42,23 @@ public class Rec_create_profile extends HttpServlet {
 
 			// Create a SQL query to insert data into demo table
 			// demo table consists of two columns, so two '?' is used
-			PreparedStatement st = con.prepareStatement("insert into rec_profile values(?,?,?,?,?,?,?)");
+			PreparedStatement st = con.prepareStatement("insert into rec_profile values(?,?,?,?,?,?,?,?)");
 
 			// For the first parameter,
 			// get the data using request object
 			// sets the data to st pointer
 			
 			// Same for second parameter
-			int id = 0;
-		
-			st.setInt(1,id);
+			String id = (String) session.getAttribute("id");			
+			int admin_checked = 0 ;
+			st.setString(1,id);
 			st.setString(2, request.getParameter("com_name"));
 			st.setString(3, request.getParameter("com_email"));
 			st.setString(4, request.getParameter("business"));
 			st.setString(5, request.getParameter("address"));
 			st.setString(6, request.getParameter("con_num"));
 			st.setString(7, request.getParameter("name"));
+			st.setInt(8,admin_checked);
 			// Execute the insert command using executeUpdate()
 			// to make changes in database
 			st.executeUpdate();

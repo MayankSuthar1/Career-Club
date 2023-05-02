@@ -41,10 +41,11 @@ Connection con = DBconnection.initializeDatabase();
 
 // Create a SQL query to insert data into demo table
 // demo table consists of two columns, so two '?' is used
-PreparedStatement st = con.prepareStatement("insert into rec_job values(?,?,?,?,?,?,?,?,?,?,?)");
+PreparedStatement st = con.prepareStatement("insert into rec_job values(?,?,?,?,?,?,?,?,?,?,?,?)");
 
 st.setString(1,request.getParameter("id"));
 int id = 0;
+int admin_checked = 0 ;
 st.setInt(2,id);
 
 InputStream inputStream = null;
@@ -64,7 +65,7 @@ Part filePart = request.getPart("logo");
     st.setString(9,request.getParameter("des"));
     st.setString(10,request.getParameter("company_name"));
     st.setString(11,request.getParameter("website"));
-    
+    st.setInt(12,admin_checked);
    
      
 st.executeUpdate();
