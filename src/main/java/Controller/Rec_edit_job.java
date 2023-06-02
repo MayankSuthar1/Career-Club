@@ -61,6 +61,7 @@ String address =request.getParameter("address");
 String job_type =request.getParameter("job_type");
 String category =request.getParameter("category");
 String des =request.getParameter("des");
+String test =request.getParameter("test");
 String company_name = request.getParameter("company_name");
 String website = request.getParameter("website");
 String submit = request.getParameter("submit");
@@ -76,7 +77,7 @@ try
 
 
 	//for update
-	String sql="Update rec_job set email=?,job_title=?,address=?,job_type=?,category=?,description=?,company_name=?,website=? where job_id='" + job_id + "'";
+	String sql="Update rec_job set email=?,job_title=?,address=?,job_type=?,category=?,description=?,test=?,company_name=?,website=? where job_id='" + job_id + "'";
 	ps = con.prepareStatement(sql);
 			
 	if(submit != null) {
@@ -100,8 +101,9 @@ try
 	ps.setString(4, job_type);
 	ps.setString(5, category);
 	ps.setString(6, des);
-	ps.setString(7, company_name);
-	ps.setString(8, website);
+	ps.setString(7, test);
+	ps.setString(8, company_name);
+	ps.setString(9, website);
 	
 	
 	int i = ps.executeUpdate();
@@ -137,11 +139,12 @@ try
 if(i > 0)
 	{
 
-	response.sendRedirect("recruiter_index.jsp");
+	response.sendRedirect("recruiter_manage_jobs.jsp");
 	}
 	else
 	{
-	System.out.println("There is a problem in updating Record.");
+		PrintWriter out = response.getWriter();
+		out.println("There is a problem in updating Record.");
 	} }
 
 else if (delete != null)
@@ -153,10 +156,14 @@ else if (delete != null)
 	int i=st.executeUpdate(sqll);
 	
 	if(i>0){
-	response.sendRedirect("recruiter_index.jsp");
+	
+	RequestDispatcher rd=request.getRequestDispatcher("recruiter_manage_jobs.jsp");  
+	rd.forward(request, response);
 	}
 	else{
-		response.sendRedirect("recruiter_manage_jobs.jsp");
+		
+		RequestDispatcher rd=request.getRequestDispatcher("recruiter_manage_jobs.jsp");  
+		rd.forward(request, response);
 	}
 	
 }
@@ -168,15 +175,6 @@ e.printStackTrace();
 }
 }
 
-
-
-
-
-// Get a writer pointer
-// to display the successful result
-PrintWriter out = response.getWriter();
-RequestDispatcher rd=request.getRequestDispatcher("recruiter_edit_job.jsp");  
-rd.forward(request, response);
 }
 catch (Exception e) {
 e.printStackTrace();

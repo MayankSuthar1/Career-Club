@@ -195,7 +195,7 @@ while(resultSet.next()){
 			<%= resultSet.getString("description") %>
 		</p>
 
-		
+		<br />
 
 	</div>
 	</div>

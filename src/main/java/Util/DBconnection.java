@@ -25,16 +25,6 @@ public class DBconnection {
 		return con;
 		
 	}
-public static ResultSet getResultFormSqlQuery(String SqlQueryString) {
-	ResultSet rs = null ;
-	try {
-		if (con == null) {
-			initializeDatabase();
-		}
-		rs =con.createStatement().executeQuery(SqlQueryString);
-	} catch (Exception ex) {
-		ex.printStackTrace();
-		}
-	return rs;
-	}
+
+
 }

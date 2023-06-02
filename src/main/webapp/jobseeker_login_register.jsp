@@ -97,13 +97,12 @@
 
 					<p class="form-row">
 						<input type="submit" class="button" name="login" value="Login" />	
-
-						<label for="rememberme" class="rememberme">
-						<input name="rememberme" type="checkbox" id="rememberme" value="forever" /> Remember Me</label>
-					</p>
-
-					<p class="lost_password">
-						<a href="#" >Lost Your Password?</a>
+					<% if (session.getAttribute("credential") != null){%>
+					<div class="notification error closeable">
+			<p><span>Error!</span> Please fill in all the fields required.</p>
+			<a class="close" href="#"></a>
+		</div>
+					<%} %>
 					</p>
 
 					

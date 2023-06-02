@@ -67,7 +67,7 @@ st.setInt(9,admin_checked);
 st.executeUpdate();
 
 Statement stmt = con.createStatement();
-String sql ="Update jobseeker_reg set login_time=1 where email='" + id + "'";
+String sql ="Update jobseeker_reg set login_time = 1 where id='" + id + "'";
 stmt.executeUpdate(sql);
 // Close all the connections
 st.close();

@@ -213,7 +213,7 @@ e.printStackTrace();
 				<mark id="message"></mark>
 	
 				<!-- Form -->
-				<form method="post" name="contactform" id="contactform" action="Contactform">
+				<form method="post" name="Rec_Contactform" id="Rec_Contactform" action="Rec_Contactform">
 	
 					<fieldset>
 	

@@ -133,11 +133,11 @@ ResultSet resultSet = null;
 
 			<tr>
 				<th><i class="fa fa-file-text"></i>Job Title</th>
-				<th><i class="fa fa-file-text"></i>Show job-seeker details</th>
+				<th><i class="fa fa-file-text"></i>Options</th>
 				
 				
 			</tr>
-			</table>
+			
 					
 			<!-- Item #1 -->
 			<%
@@ -153,28 +153,21 @@ while(resultSet.next()){
 	
     
 %>
-			<form method="post" action="recruiter_show_jobseekerdetails.jsp">
-			<table class="manage-table responsive-table">
-
-			<tr>
-				<th></th>
-				<th></th>
-				
-				
-			</tr>
 			
 			<tr>
-				<td class="title"><%=resultSet.getString("job_title") %><input name="job_id" type="hidden" value="<%=resultSet.getInt("job_id") %>"/></td>
-			
+				<td class="title"><%=resultSet.getString("job_title")%>
+				<input name="test_title" type="hidden" value="<%=resultSet.getString("test") %>"/> 
+				<input name="job_id" type="hidden" value="<%=resultSet.getString("job_id") %>"/></td>
+				
+				
 				<td class="action">
 				
-				<button type="submit" name="show" ><i class="fa fa-pencil"></i> Show</button>
+				<a href="recruiter_show_jobseeker_details.jsp?test_title=<%=resultSet.getString("test")%>&job_id=<%=resultSet.getString("job_id")%>"><i class="fa fa-pencil"></i>Show jobseeker</a>
+				<a href="recruiter_show_accepted_jobseeker_details.jsp?test_title=<%=resultSet.getString("test")%>&job_id=<%=resultSet.getString("job_id")%>"><i class="fa  fa-check "></i>Show accepted jobseeker</a>
 					
 				</td>
 				
 			</tr>
-			</table>
-			</form>
 			<% 
 }
 con.close();
@@ -182,11 +175,14 @@ con.close();
 e.printStackTrace();
 }
 %>
+			</table>
+			
+			
 			
 
 		
 		<br>
-		<a href="recruiter_create_job.jsp" class="button">Add Job</a>
+		
 
 	</div>
 
@@ -212,7 +208,7 @@ e.printStackTrace();
 				<mark id="message"></mark>
 	
 				<!-- Form -->
-				<form method="post" name="contactform" id="contactform" action="Contactform">
+				<form method="post" name="Rec_Contactform" id="Rec_Contactform" action="Rec_Contactform">
 	
 					<fieldset>
 	

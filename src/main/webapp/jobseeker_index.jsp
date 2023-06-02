@@ -6,8 +6,16 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="Util.DBconnection" %>
 <%@page import="javax.servlet.http.HttpSession"%>
+<%@page import="java.sql.*"%>
+<%@page import="java.io.*"%>
+<%@page import="java.util.Base64"%>
+<%@page import="javax.imageio.*"%>
+<%@page import="java.awt.image.*"%>
 <%
-
+if(session.getAttribute("id") == null){
+	 RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+	    dispatcher.forward(request, response);
+}
 String name = request.getParameter("id");
 String driver = "com.mysql.cj.jdbc.Driver";
 String connectionUrl = "jdbc:mysql://localhost:3306/";
@@ -22,6 +30,7 @@ e.printStackTrace();
 Connection con = null;
 Statement statement = null;
 ResultSet resultSet = null;
+byte[] imageData = null;
 %>  
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -73,7 +82,18 @@ ResultSet resultSet = null;
 				<li><a>Skill Test</a>
 					<ul>
 						<li><a href="jobseeker_test_find_page.jsp">Choose Test</a></li>
-						
+						<%
+						con = DriverManager.getConnection(connectionUrl+database, userid, password);
+						statement=con.createStatement();
+						String sqli ="select * from jobseeker_score where jobseeker_id='" + session.getAttribute("id") + "'";
+
+						resultSet = statement.executeQuery(sqli);
+						while(resultSet.next()){
+						if(resultSet != null){
+						%>
+						<li><a href="jobseeker_manage_result.jsp">Show results</a></li>
+						<%} 
+						}%>
 					</ul>
 				</li>
 					
@@ -88,7 +108,6 @@ ResultSet resultSet = null;
 				</li>
 				<li><a>Profile</a>
 					<ul>
-						<li><a href="jobseeker_create_profile.jsp">Create Profile</a></li>
 						<li><a href="jobseeker_edit_profile.jsp">Edit Profile</a></li>
 						
 					</ul>
@@ -99,7 +118,7 @@ ResultSet resultSet = null;
 			</ul>
 			
 		<!-- Logout -->
-		<form method="post" action="logout.jsp">
+		<form method="post" action="Logout">
 			<ul class="responsive float-right">
 			
 				<li><button type="submit">Logout</button></li>
@@ -178,11 +197,25 @@ e.printStackTrace();
 	<div class="padding-right">
 		<h3 class="margin-bottom-25">Available Tests</h3>
 		<ul class="job-list">
+			<%
+try{
+con = DriverManager.getConnection(connectionUrl+database, userid, password);
+statement=con.createStatement();
+String sql ="select * from admin_test_detail";
 
-			<li><a href="jobseeker_test_details.jsp">
-				<img src="jobseeker_look/images/job-list-logo-03.png" alt="">
+resultSet = statement.executeQuery(sql);
+while(resultSet.next()){
+	Blob imageBlob = resultSet.getBlob("logo");
+    if (imageBlob != null) {
+    	//displaying the logo from the database
+      imageData = imageBlob.getBytes(1, (int)imageBlob.length());
+
+      }
+%>
+			<li><a href="jobseeker_test_details.jsp?title=<%=resultSet.getString("title")%>">
+				<%out.println("<img src=\"data:image/jpeg;base64," + Base64.getEncoder().encodeToString(imageData) + "\" style=\"max-width: 250px; max-height: 250px;\" />"); %>
 				<div class="job-list-content">
-					<h4>Fornt-end Development Test<span class="full-time">Skill Test</span></h4>
+					<h4><%=resultSet.getString("title") %></h4>
 					<div class="job-icons">
 						
 					</div>
@@ -191,7 +224,13 @@ e.printStackTrace();
 				<div class="clearfix"></div>
 			</li>
 
-			
+			<%
+}
+con.close();
+} catch (Exception e) {
+e.printStackTrace();
+}
+%>
 		</ul>
 
 		<a href="jobseeker_test_find_page.jsp" class="button centered"><i class="fa fa-plus-circle"></i> Show More Tests</a>

@@ -88,9 +88,13 @@ ResultSet resultSet = null;
 	
 	</ul>
 		<!-- Logout -->
-		<ul class="responsive float-right">
-			<li><a href="index.jsp">Logout</a></li>
-		</ul>
+		<form method="post" action="Logout">
+			<ul class="responsive float-right">
+			
+				<li><button type="submit">Logout</button></li>
+				
+			</ul>
+			</form>
 	</nav>
 
 		<!-- Navigation -->
@@ -163,7 +167,7 @@ e.printStackTrace();
 				<mark id="message"></mark>
 	
 				<!-- Form -->
-				<form method="post" name="contactform" id="contactform" action="Contactform">
+				<form method="post" name="Rec_Contactform" id="Rec_Contactform" action="Rec_Contactform">
 	
 					<fieldset>
 	

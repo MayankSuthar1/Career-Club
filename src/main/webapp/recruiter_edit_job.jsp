@@ -223,7 +223,34 @@ while(resultSet.next()){
 				</div>
 			</div>
 
-			
+			<div class="form">
+				<div class="select">
+					<h5>Available Tests</h5>
+					<select data-placeholder="Choose test to show your job" class="chosen-select" name="test" >
+					<%
+					
+					Connection connn = null;
+					   Statement stmtt = null;
+					   ResultSet rs = null;
+					
+					   connn = DriverManager.getConnection(connectionUrl+database, userid, password);
+					   stmtt = connn.createStatement();   
+				      // Execute the query to retrieve data
+				      String query = "SELECT title FROM admin_test_detail";
+				      rs = stmtt.executeQuery(query); %>
+				      <option value=" <%=resultSet.getString("test")%>"><%=resultSet.getString("test")%></option>
+					 <%while (rs.next()) {%>
+         <option value="<%=rs.getString("title")%>"><%=rs.getString("title")%></option>
+    			 <%
+    			 } 
+					 rs.close();
+					 stmtt.close();
+    			 	connn.close();
+					
+    			 %> 
+      		</select>
+				</div>
+			</div> 
 
 
 			<!-- Description -->
@@ -319,7 +346,7 @@ e.printStackTrace();
 				<mark id="message"></mark>
 	
 				<!-- Form -->
-				<form method="post" name="contactform" id="contactform" action="Contactform">
+				<form method="post" name="Rec_Contactform" id="Rec_Contactform" action="Rec_Contactform">
 	
 					<fieldset>
 	

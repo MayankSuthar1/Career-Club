@@ -65,7 +65,7 @@ public class Rec_create_profile extends HttpServlet {
 			//updating that user is login for first time and now its have profile so that next time it will redirect to the index page
 			Statement stmt = con.createStatement();
 			String company_email =request.getParameter("com_email");
-			String sql ="Update rec_reg set login_time=1 where email='" + company_email + "'";
+			String sql ="Update rec_reg set login_time=1 where id='" + id + "'";
 			stmt.executeUpdate(sql);
 			// Close all the connections
 			st.close();

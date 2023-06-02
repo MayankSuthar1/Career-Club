@@ -212,7 +212,34 @@ while(resultSet.next()){
 				<textarea class="WYSIWYG" name="des" cols="40" rows="3" id="summary" spellcheck="true"></textarea>
 			</div>
 
-			
+			<!-- Choose the test -->
+			<div class="form">
+				<div class="select">
+					<h5>Available Tests</h5>
+					<select data-placeholder="Choose test to show your job" class="chosen-select" name="test" >
+					<%
+					
+					Connection connn = null;
+					   Statement stmtt = null;
+					   ResultSet rs = null;
+					
+					   connn = DriverManager.getConnection(connectionUrl+database, userid, password);
+					   stmtt = connn.createStatement();   
+				      // Execute the query to retrieve data
+				      String query = "SELECT title FROM admin_test_detail";
+				      rs = stmtt.executeQuery(query); %>
+					 <%while (rs.next()) {%>
+         <option value="<%=rs.getString("title")%>"><%=rs.getString("title")%></option>
+    			 <%
+    			 } 
+					 rs.close();
+					 stmtt.close();
+    			 	connn.close();
+					
+    			 %> 
+      		</select>
+				</div>
+			</div> 
 
 			
 
@@ -276,7 +303,7 @@ e.printStackTrace();
 				<mark id="message"></mark>
 	
 				<!-- Form -->
-				<form method="post" name="contactform" id="contactform" action="Contactform">
+				<form method="post" name="Rec_Contactform" id="Rec_Contactform" action="Rec_Contactform">
 	
 					<fieldset>
 	

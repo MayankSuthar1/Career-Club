@@ -24,7 +24,6 @@
 <![endif]-->
 
 </head>
-
 <body>
 <div id="wrapper">
 
@@ -82,7 +81,15 @@
 						<label for="password">Password:</label>
 						<input class="input-text" type="password" name="password" id="password" />
 					</p>
-
+					
+					<%
+					String error = "error";
+					if(session.getAttribute("error") == error){ %>
+					<div class="notification error closeable">
+						<p><span>Error!</span> Your username or password is incorrect.</p>
+						<a class="close" href="#"></a>
+					</div>
+					<%} %>
 					<p class="form-row">
 					<input type="submit" class="button" name="login" value="Login" />	
 

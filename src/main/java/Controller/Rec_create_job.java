@@ -41,7 +41,7 @@ Connection con = DBconnection.initializeDatabase();
 
 // Create a SQL query to insert data into demo table
 // demo table consists of two columns, so two '?' is used
-PreparedStatement st = con.prepareStatement("insert into rec_job values(?,?,?,?,?,?,?,?,?,?,?,?)");
+PreparedStatement st = con.prepareStatement("insert into rec_job values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
 st.setString(1,request.getParameter("id"));
 int id = 0;
@@ -63,9 +63,10 @@ Part filePart = request.getPart("logo");
     st.setString(7,request.getParameter("job_type"));
     st.setString(8,request.getParameter("category"));
     st.setString(9,request.getParameter("des"));
-    st.setString(10,request.getParameter("company_name"));
-    st.setString(11,request.getParameter("website"));
-    st.setInt(12,admin_checked);
+    st.setString(10,request.getParameter("test"));
+    st.setString(11,request.getParameter("company_name"));
+    st.setString(12,request.getParameter("website"));
+    st.setInt(13,admin_checked);
    
      
 st.executeUpdate();
@@ -79,7 +80,7 @@ con.close();
 // Get a writer pointer
 // to display the successful result
 PrintWriter out = response.getWriter();
-RequestDispatcher rd=request.getRequestDispatcher("recruiter_index.jsp");  
+RequestDispatcher rd=request.getRequestDispatcher("recruiter_manage_jobs.jsp");  
 rd.forward(request, response);
 }
 catch (Exception e) {

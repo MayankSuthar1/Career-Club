@@ -1,5 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+      <%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="Util.DBconnection" %>
+<%@page import="javax.servlet.http.HttpSession"%>
+<%@page import="java.sql.*"%>
+<%@page import="java.io.*"%>
+<%@page import="java.util.Base64"%>
+<%@page import="javax.imageio.*"%>
+<%@page import="java.awt.image.*"%>
+<%
+String name = request.getParameter("id");
+String driver = "com.mysql.cj.jdbc.Driver";
+String connectionUrl = "jdbc:mysql://localhost:3306/";
+String database = "pro";
+String userid = "root";
+String password = "root";
+try {
+Class.forName(driver);
+} catch (ClassNotFoundException e) {
+e.printStackTrace();
+}
+Connection con = null;
+Statement statement = null;
+ResultSet resultSet = null;
+byte[] imageData = null;
+%> 
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
@@ -116,12 +144,25 @@
 		<h3 class="margin-bottom-25">Available Tests</h3>
 		<ul class="job-list">
 
-			
+			<%
+try{
+con = DriverManager.getConnection(connectionUrl+database, userid, password);
+statement=con.createStatement();
+String sql ="select * from admin_test_detail";
+
+resultSet = statement.executeQuery(sql);
+while(resultSet.next()){
+	Blob imageBlob = resultSet.getBlob("logo");
+    if (imageBlob != null) {
+    	//displaying the logo from the database
+      imageData = imageBlob.getBytes(1, (int)imageBlob.length());
+
+      }%>
 
 			<li><a href="jobseeker_login_register.jsp">
-				<img src="jobseeker_look/images/job-list-logo-03.png" alt="">
+				<%out.println("<img src=\"data:image/jpeg;base64," + Base64.getEncoder().encodeToString(imageData) + "\" style=\"max-width: 250px; max-height: 250px;\" />"); %>
 				<div class="job-list-content">
-					<h4>Fornt-end Development Test<span class="full-time">Skill Test</span></h4>
+					<h4><%=resultSet.getString("title") %></h4>
 					<div class="job-icons">
 						
 					</div>
@@ -130,7 +171,13 @@
 				<div class="clearfix"></div>
 			</li>
 
-			
+			<%
+}
+con.close();
+} catch (Exception e) {
+e.printStackTrace();
+}
+%>
 
 			
 		</ul>
@@ -154,12 +201,12 @@
 		</div>
 
 	</div>
+
+
+
+
+
 </div>
-
-
-
-
-
 
 
 <!-- Footer

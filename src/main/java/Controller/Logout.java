@@ -13,7 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Logout")
 public class Logout extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
@@ -39,7 +44,7 @@ public class Logout extends HttpServlet {
         out.println("}");
         out.println("</script>");
         out.println("<h3>You have been logged out.</h3>");
-        out.println("<a href='index.jsp' onclick='noBack();'></a>");
+        out.println("<a href='index.jsp' onclick='noBack();'>Click here to go back to index page</a>");
         out.println("</body></html>");
     }
 

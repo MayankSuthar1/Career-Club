@@ -1,7 +1,12 @@
 package Controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,36 +15,43 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Util.DBconnection;
-
-/**
- * Servlet implementation class Admin_Login
- */
 @WebServlet("/Rec_login")
 public class Rec_login extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Getting all data form use/customer
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		//Creating Sesssion
-		HttpSession hs = request.getSession();
-		try {
-			//Creating Result Set
-			
-			//Query to check login details
-			 ResultSet resultset = DBconnection.getResultFormSqlQuery("select * from rec_reg where email='"+email+"' and password='"+password+"'");
-			//checking whether the details of user are null or not
-			if (resultset.next()) {
-				//Storing the login details in session
-				hs.setAttribute("id", resultset.getString("id"));
-				//Redirecting response to the index.jsp
-				// Check if user has logged in before
-		        if (resultset.getInt("login_time") == 0) {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        String dbDriver ="com.mysql.cj.jdbc.Driver";
+		String dbURL = "jdbc:mysql:// localhost:3306/";
+		String dbName = "pro";
+		String dbUsername ="root";
+		String dbPassword = "root";
+        try {
+        	try {
+				Class.forName(dbDriver);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		Connection conn = DriverManager.getConnection(dbURL + dbName,dbUsername,dbPassword);
+
+            // Query the database for the user
+            String query = "SELECT * FROM rec_reg WHERE email = ? AND password = ?";
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1, email);
+            statement.setString(2, password);
+            ResultSet result = statement.executeQuery();
+            HttpSession session = request.getSession();
+            if (result.next()) {
+                // Valid credentials, create a session and store the session ID
+            	
+                String sessionId = result.getString("id");
+                session.setAttribute("email", email);
+                session.setAttribute("id", sessionId);
+                if (result.getInt("login_time") == 0) {
 		            // Redirect to create profile page
 		            response.sendRedirect("recruiter_create_profile.jsp");
 		            
@@ -49,19 +61,21 @@ public class Rec_login extends HttpServlet {
 		            // Redirect to home page
 		            response.sendRedirect("recruiter_index.jsp");
 		        }
-			//	response.sendRedirect("recruiter_index.jsp");	
-			}
-			else {
+
+            result.close();
+            statement.close();
+            conn.close();
+        } 
+            else {
 				//if wrong credentials are entered
 				String message = "you have enter worng credentials";
-				hs.setAttribute("credential", message);
+				session.setAttribute("credential", message);
 				//Redirecting response to the admin_login.jsp
 				response.sendRedirect("recruiter_login_register.jsp");
 			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-
+        }
+            catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

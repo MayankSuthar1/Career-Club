@@ -320,7 +320,7 @@
 		-ms-transition: 0;
 		transition: 0;
 
-	input[type="checkbox"] { display: inline; }
+	input[type="checkbox"] { display: inline }
 
 	label span,
 	legend span {

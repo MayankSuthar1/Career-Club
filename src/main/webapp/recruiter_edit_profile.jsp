@@ -233,10 +233,90 @@ e.printStackTrace();
 
 </div>
 
+<!-- Footer
+================================================== -->
+<div class="margin-top-100"></div>
+
+<div id="footer">
+	<!-- Container -->
+<div class="container">
+
+	<div class="eleven columns">
+	
+		<h1 class="margin-bottom-15" style="color:white ;">Contact Us</h1>
+		
+			<!-- Contact Form -->
+			<section id="contact" class="padding-right">
+	
+				<!-- Success Message -->
+				<mark id="message"></mark>
+	
+				<!-- Form -->
+				<form method="post" name="Rec_Contactform" id="Rec_Contactform" action="Rec_Contactform">
+	
+					<fieldset>
+	
+						<div>
+							<label>Name:</label>
+							<input name="name" type="text" id="name" />
+						</div>
+	
+						<div>
+							<label >Email: <span>*</span></label>
+							<input name="email" type="email" id="email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" />
+						</div>
+	
+						<div>
+							<label>Message: <span>*</span></label>
+							<textarea name="comment" cols="40" rows="3" id="comment" spellcheck="true"></textarea>
+						</div>
+	
+					</fieldset>
+					<div id="result"></div>
+					<input type="submit" class="submit" id="submit" value="Send Message" />
+					<div class="clearfix"></div>
+					<div class="margin-bottom-40"></div>
+				</form>
+	
+			</section>
+			<!-- Contact Form / End -->
+	
+	</div>
+	<!-- Container / End -->
+	
+	
+	<!-- Sidebar
+	================================================== -->
+	<div class="five columns">
+	
+		<!-- Information -->
+		<h1 class="margin-bottom-10" style="color:white ;">Information</h1>
+		<div class="widget-box">
+		<h4>	<p style="color: rgb(120, 119, 119);">A skill base job hiring website</p>
+	
+			<ul class="contact-informations" style="color: rgb(120, 119, 119);">
+				<li>45 Park Avenue, Apt. 303</li>
+				<li>Kalol, 382721 </li>
+			</ul>
+	
+			<ul class="contact-informations second" style="color: rgb(120, 119, 119);">
+				<li><i class="fa fa-phone"></i> <p>+48 880 440 110</p></li>
+				<li><i class="fa fa-envelope"></i> <p>careerclub@contact.com</p></li>
+				<li><i class="fa fa-globe"></i> <p>www.careerclub.com</p></li>
+			</ul>
+		</h4>
+		</div>
+		
+		
+	
+	</div>
+	</div>
+		<!-- Container / End -->
 
 <!-- Back To Top Button -->
 <div id="backtotop"><a href="#"></a></div>
 
+</div>
 </div>
 <!-- Wrapper / End -->
 

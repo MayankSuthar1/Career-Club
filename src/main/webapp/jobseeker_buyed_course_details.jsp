@@ -140,7 +140,6 @@ String sql ="select * from jobseeker_buyed_course where course_id='" + course_id
 resultSet = statement.executeQuery(sql);
 while(resultSet.next()){
 %>
-			<span><a href="jobseeker_buyed_course.jsp"><%= resultSet.getString("course_name") %></a></span>
 			<h2><%= resultSet.getString("course_name") %></h2>
 		<%
 }
@@ -165,8 +164,8 @@ e.printStackTrace();
 try{
 con = DriverManager.getConnection(connectionUrl+database, userid, password);
 statement=con.createStatement();
-String sql ="select * from jobseeker_buyed_course where id='" + course_id + "'";
-
+String sql ="select * from jobseeker_buyed_course where course_id='" + course_id + "'";
+System.out.println(sql);
 resultSet = statement.executeQuery(sql);
 while(resultSet.next()){
 %>
@@ -200,15 +199,7 @@ while(resultSet.next()){
 	</div>
 
 
-	<!-- Widgets -->
-	<div class="five columns">
-
-		<!-- Sort by -->
-		
-
-	</div>
-	<!-- Widgets / End -->
-
+	
 <%
 }
 con.close();
@@ -216,6 +207,7 @@ con.close();
 e.printStackTrace();
 }
 %>
+
 </div>
 
 
