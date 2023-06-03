@@ -185,9 +185,19 @@ while(resultSet.next()){
 			    <div class="app-tab-content" id="one-1">
 
 					<div class="clearfix"></div>
-					<a href="recruiter_show_jobseeker_details_process.jsp?accept=true&js_id=<%=resultSet.getString("jobseeker_id")%>&test=<%=resultSet.getString("test_title")%>&job_id=<%=resultSet.getString("job_id") %>" class="button margin-top-15">Accept this application</a>
-					<a href="recruiter_show_jobseeker_details_process.jsp?delete=true&js_id=<%=resultSet.getString("jobseeker_id")%>&test=<%=resultSet.getString("test_title")%>&job_id=<%=resultSet.getString("job_id") %>" class="button gray margin-top-15 delete-application">Delete this application</a>
-
+					<form method="post" action="Rec_jobseeker_accepted_application_email">
+					
+					<input type="hidden" name="js_id" value="<%=resultSet.getString("jobseeker_id")%>" />
+					<input type="hidden" name="test" value="<%=resultSet.getString("test_title")%>" />
+					<input type="hidden" name="job_id" value="<%=resultSet.getString("job_id")%>" />
+					<input type="hidden" name="email" value="<%=resultSet.getString("email")%>" />
+					<input type="hidden" name="name" value="<%=resultSet.getString("jobseeker_name")%>" />
+					
+					<input class="button margin-top-15" type="submit" name ="accept" value="Accept this application"/>
+					<input class="button gray margin-top-15 delete-application" type="submit" name ="delete" value="Delete this application"/>
+					<%-- <a href="recruiter_show_jobseeker_details_process.jsp?accept=true&js_id=<%=resultSet.getString("jobseeker_id")%>&test=<%=resultSet.getString("test_title")%>&job_id=<%=resultSet.getString("job_id") %>" class="button margin-top-15">Accept this application</a>
+					<a href="recruiter_show_jobseeker_details_process.jsp?delete=true&js_id=<%=resultSet.getString("jobseeker_id")%>&test=<%=resultSet.getString("test_title")%>&job_id=<%=resultSet.getString("job_id") %>" class="button gray margin-top-15 delete-application">Delete this application</a>--%>
+					</form>
 			    </div>
 			    
 			    <!-- Second Tab -->

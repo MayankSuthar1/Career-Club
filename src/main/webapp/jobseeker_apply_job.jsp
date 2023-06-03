@@ -157,7 +157,7 @@ try{
 con = DriverManager.getConnection(connectionUrl+database, userid, password);
 statement=con.createStatement();
 String sql ="select * from rec_job where test='"+request.getParameter("title")+"'";
-System.out.println(sql);
+
 resultSet = statement.executeQuery(sql);
 
 while(resultSet.next()){

@@ -119,7 +119,7 @@ byte[] imageData = null;
 	<div class="container">
 
 		<div class="sixteen columns">
-			<h2>Manage Applications</h2>
+			<h2>Accepted Applications</h2>
 			
 		</div>
 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@page import="java.sql.DriverManager"%>
+     <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
@@ -8,6 +8,9 @@
 <%@page import="javax.servlet.http.HttpSession"%>
 <%@page import="java.sql.*"%>
 <%@page import="java.io.*"%>
+<%@page import="java.util.Base64"%>
+<%@page import="javax.imageio.*"%>
+<%@page import="java.awt.image.*"%>
 <%
 
 String name = request.getParameter("id");
@@ -24,6 +27,7 @@ e.printStackTrace();
 Connection con = null;
 Statement statement = null;
 ResultSet resultSet = null;
+byte[] imageData = null;
 %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -62,7 +66,7 @@ ResultSet resultSet = null;
 
 		<!-- Logo -->
 		<div id="logo">
-			<h1><a href="recruiter_index.jsp"><img src="recruiter_look/images/logo.png" alt="career club" /></a></h1>
+			<h1><a href="admin_home.jsp"><img src="recruiter_look/images/logo.png" alt="career club" /></a></h1>
 		</div>
 
 		
@@ -71,20 +75,28 @@ ResultSet resultSet = null;
 	<ul id="responsive">
 
 	
-	<li><a href="#">Jobs</a>
-		<ul>
-	<li><a href="recruiter_create_job.jsp">create job</a></li>
-	<li><a href="recruiter_manage_jobs.jsp">manage jobs</a></li>
-		</ul>
-	</li>
-
-	<li><a href="recruiter_jobseeker_details.jsp">Get Job Seekers Details</a></li>
-			
-		<li><a href="#">Profile</a>
-				<ul>			
-					<li><a href="recruiter_edit_profile.jsp">Edit</a></li>		
-				</ul>
-			</li>
+	<li><a>Courses</a>
+			<ul>
+			<li><a href="admin_create_course.jsp">Create course</a></li>
+		<li><a href="admin_manage_course.jsp">Manage course</a></li>
+		
+			</ul>
+		</li>
+		<li><a href="#">Tests</a>
+			<ul>
+				<li><a href="admin_create_test.jsp">Create test</a></li>
+				<li><a href="admin_edit_test.jsp">Manage test</a></li>
+				
+				
+			</ul>
+		</li>
+		<li><a href="#">Get details</a>
+			<ul>
+				<li><a href="admin_jobseeker_details.jsp">Job Seeker</a></li>
+				<li><a href="admin_recruiter_details.jsp">Recruiter</a></li>
+				<li><a href="admin_recruiter_jobs_details.jsp">Recruiter Jobs</a></li>	
+			</ul>
+		</li>
 		
 	
 	</ul>
@@ -110,7 +122,7 @@ ResultSet resultSet = null;
 	<div class="container">
 
 		<div class="sixteen columns">
-			<h2>Manage Job Applications</h2>
+			<h2>Manage courses</h2>
 			<nav id="breadcrumbs">
 				
 			</nav>
@@ -123,156 +135,78 @@ ResultSet resultSet = null;
 <!-- Content
 ================================================== -->
 <div class="container">
-	
-	<!-- Table -->
-	<div class="sixteen columns">
 
-			
+			<!-- Table -->
+			<div class="sixteen columns">
 
-		<table class="manage-table responsive-table">
+				
 
-			<tr>
-				<th><i class="fa fa-file-text"></i>Job Title</th>
-				<th><i class="fa fa-file-text"></i>Options</th>
+				<table class="manage-table responsive-table">
 				
 				
-			</tr>
-			
-					
-			<!-- Item #1 -->
-			<%
+					<tr>
+						<th><i class=""></i>Logo</th>
+						<th><i class=""></i>    Test title</th>
+						<th><i class=""></i>Test time</th>
+						
+					</tr>
+
+					<!-- Profile -->
+					<%
 try{
 con = DriverManager.getConnection(connectionUrl+database, userid, password);
 statement=con.createStatement();
-String sql ="select * from rec_job where id='" + session.getAttribute("id") + "'";
+String sql ="select * from admin_test_detail ";
 
 resultSet = statement.executeQuery(sql);
 
 while(resultSet.next()){
 
-	
+	Blob imageBlob = resultSet.getBlob("logo");
+    
     
 %>
-			
-			<tr>
-				<td class="title"><%=resultSet.getString("job_title")%>
-				<input name="test_title" type="hidden" value="<%=resultSet.getString("test") %>"/> 
-				<input name="job_id" type="hidden" value="<%=resultSet.getString("job_id") %>"/></td>
+					<tr>
+						<% if (imageBlob != null) {
+						    	//displaying the logo from the database
+						      imageData = imageBlob.getBytes(1, (int)imageBlob.length());
+						
+						      // display the image using HTML
+						      out.println("<td><img src=\"data:image/jpeg;base64," + Base64.getEncoder().encodeToString(imageData) + "\" style=\"max-width: 100px; max-height: 100px;\"/></td>");
+						    }
+						%>					
+						<td ><%= resultSet.getString("title")%></td>
+						<td class="centered"><%= resultSet.getString("time")%></td>
+						
+						
+						
+						<td class="action">
+						<a	href="admin_edit_test_process.jsp?id=<%=resultSet.getString("id")%>&delete=1&title=<%=resultSet.getString("title")%>" class="delete"><i class="fa fa-remove"></i> Delete</a>
+						</td>
 				
-				
-				<td class="action">
-				
-				<a href="recruiter_show_jobseeker_details.jsp?test_title=<%=resultSet.getString("test")%>&job_id=<%=resultSet.getString("job_id")%>"><i class="fa fa-pencil"></i>Show jobseeker application</a>
-				<a href="recruiter_show_accepted_jobseeker_details.jsp?test_title=<%=resultSet.getString("test")%>&job_id=<%=resultSet.getString("job_id")%>"><i class="fa  fa-check "></i>Show accepted jobseeker application</a>
-					
-				</td>
-				
-			</tr>
-			<% 
+					</tr>
+				<% 
 }
 con.close();
 } catch (Exception e) {
 e.printStackTrace();
 }
 %>
-			</table>
-			
-			
-			
 
-		
-		<br>
-		
+				</table>
 
-	</div>
+				
 
-</div>
+			</div>
+
+		</div>
 
 
 <!-- Footer
 ================================================== -->
 <div class="margin-top-100"></div>
 
-<div id="footer">
-	<!-- Container -->
-<div class="container">
 
-	<div class="eleven columns">
-	
-		<h1 class="margin-bottom-15" style="color:white ;">Contact Us</h1>
-		
-			<!-- Contact Form -->
-			<section id="contact" class="padding-right">
-	
-				<!-- Success Message -->
-				<mark id="message"></mark>
-	
-				<!-- Form -->
-				<form method="post" name="Rec_Contactform" id="Rec_Contactform" action="Rec_Contactform">
-	
-					<fieldset>
-	
-						<div>
-							<label>Name:</label>
-							<input name="name" type="text" id="name" />
-						</div>
-	
-						<div>
-							<label >Email: <span>*</span></label>
-							<input name="email" type="email" id="email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" />
-						</div>
-	
-						<div>
-							<label>Message: <span>*</span></label>
-							<textarea name="comment" cols="40" rows="3" id="comment" spellcheck="true"></textarea>
-						</div>
-	
-					</fieldset>
-					<div id="result"></div>
-					<input type="submit" class="submit" id="submit" value="Send Message" />
-					<div class="clearfix"></div>
-					<div class="margin-bottom-40"></div>
-				</form>
-	
-			</section>
-			<!-- Contact Form / End -->
-	
-	</div>
-	<!-- Container / End -->
-	
-	
-	<!-- Sidebar
-	================================================== -->
-	<div class="five columns">
-	
-		<!-- Information -->
-		<h1 class="margin-bottom-10" style="color:white ;">Information</h1>
-		<div class="widget-box">
-		<h4>	<p style="color: rgb(120, 119, 119);">A skill base job hiring website</p>
-	
-			<ul class="contact-informations" style="color: rgb(120, 119, 119);">
-				<li>45 Park Avenue, Apt. 303</li>
-				<li>Kalol, 382721 </li>
-			</ul>
-	
-			<ul class="contact-informations second" style="color: rgb(120, 119, 119);">
-				<li><i class="fa fa-phone"></i> <p>+48 880 440 110</p></li>
-				<li><i class="fa fa-envelope"></i> <p>careerclub@contact.com</p></li>
-				<li><i class="fa fa-globe"></i> <p>www.careerclub.com</p></li>
-			</ul>
-		</h4>
-		</div>
-		
-		
-	
-	</div>
-	</div>
-		<!-- Container / End -->	
-
-<!-- Back To Top Button -->
-<div id="backtotop"><a href="#"></a></div>
-
-</div>
 </div>
 <!-- Wrapper / End -->
 
