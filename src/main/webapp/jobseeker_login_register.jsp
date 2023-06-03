@@ -97,13 +97,19 @@
 
 					<p class="form-row">
 						<input type="submit" class="button" name="login" value="Login" />	
+						</p>
+						
+						<p class="lost_password">
+						<a href="jobseeker_forgotpassword.jsp" >Lost Your Password?</a>
+					</p>
+					
 					<% if (session.getAttribute("credential") != null){%>
 					<div class="notification error closeable">
 			<p><span>Error!</span> Please fill in all the fields required.</p>
 			<a class="close" href="#"></a>
 		</div>
 					<%} %>
-					</p>
+					
 
 					
 				</form>

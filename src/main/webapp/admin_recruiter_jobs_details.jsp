@@ -137,29 +137,13 @@ byte[] imageData = null;
 
 		<!-- Content
 ================================================== -->
-		<div class="container">
+		
 
-			<!-- Table -->
-			<div class="sixteen columns">
-
-				
-				
-				<table class="manage-table responsive-table">
-				
-				
-					<tr>
-						<th><i class=""></i> Logo</th>
-						<th><i class=""></i> Email</th>
-						<th><i class=""></i> Job Title</th>
-						<th><i class=""></i> Address</th>
-						<th><i class=""></i> Job_type</th>
-						<th><i class=""></i> Category</th>
-						<th><i class=""></i> Company Name</th>
-						<th><i class=""></i> Website</th>
-					</tr>
-
-					<!-- Profile -->
-					<%
+<div class="container">
+	
+	<!-- Applications -->
+	<div class="sixteen columns">
+		<%
 try{
 con = DriverManager.getConnection(connectionUrl+database, userid, password);
 statement=con.createStatement();
@@ -167,50 +151,121 @@ String sql ="select * from rec_job where admin_checked =0 ";
 
 resultSet = statement.executeQuery(sql);
 
+if (!resultSet.isBeforeFirst()) {
+	%>
+	<div class="notification error closeable">
+	<p><span>Error!</span> there is no records in database.</p>
+	<a class="close" href="#"></a>
+</div>
+<%
+}
+
 while(resultSet.next()){
 
 	Blob imageBlob = resultSet.getBlob("logo");
     
+	if (imageBlob != null) {
+    	//displaying the logo from the database
+      imageData = imageBlob.getBytes(1, (int)imageBlob.length());
+
+      // display the image using HTML
+     
+    }
     
 %>
-					<tr>
-						<% if (imageBlob != null) {
-						    	//displaying the logo from the database
-						      imageData = imageBlob.getBytes(1, (int)imageBlob.length());
-						
-						      // display the image using HTML
-						      out.println("<td><img src=\"data:image/jpeg;base64," + Base64.getEncoder().encodeToString(imageData) + "\" style=\"max-width: 200px; max-height: 200px;\"/></td>");
-						    }
-						%>					
-						<td class="centered"><%= resultSet.getString("email")%></td>
-						<td class="centered"><%= resultSet.getString("job_title")%></td>
-						<td class="centered"><%= resultSet.getString("address")%></td>
-						<td class="centered"><%= resultSet.getString("job_type")%></td>
-						<td class="centered"><%= resultSet.getString("category")%></td>
-						<td class="centered"><%= resultSet.getString("company_name")%></td>
-						<td class="centered"><%= resultSet.getString("website")%></td>
-						
-						<td class="action"><a href="admin_rec_js_ok_delete_process.jsp?id=<%= resultSet.getString("id")%>&job_id=<%= resultSet.getString("job_id")%>&rec_job_ok=ok"><i class="fa fa-pencil"></i>Ok</a>
-						<a	href="admin_rec_js_ok_delete_process.jsp?id=<%= resultSet.getString("id")%>&job_id=<%= resultSet.getString("job_id")%>&rec_job_delete=ok" class="delete"><i class="fa fa-remove"></i> Delete</a></td>
+		<!-- Application #1 -->
+		<div class="application">
+			<div class="app-content">
 				
-					</tr>
-				<% 
+				<!-- Name / Avatar -->
+				<div class="info">
+					<%out.println("<img src=\"data:image/jpeg;base64," + Base64.getEncoder().encodeToString(imageData) + "\" style=\"max-width: 300px; max-height: 300px;\"/>"); %>
+					<span><%=resultSet.getString("job_title")%></span>
+					
+				</div>
+				
+				<!-- Buttons -->
+				<div class="buttons">
+					<a href="#one-1" class="button gray app-link"><i class="fa fa-pencil"></i> Edit</a>
+					<a href="#three-1" class="button gray app-link"><i class="fa fa-plus-circle"></i> Show Details</a>
+				</div>
+				<div class="clearfix"></div>
+
+			</div>
+
+			<!--  Hidden Tabs -->
+			<div class="app-tabs">
+
+				<a href="#" class="close-tab button gray"><i class="fa fa-close"></i></a>
+				
+				<!-- First Tab -->
+			    <div class="app-tab-content" id="one-1">
+					<div class="clearfix"></div>
+					<center><a href="admin_rec_js_ok_delete_process.jsp?id=<%= resultSet.getString("id")%>&job_id=<%= resultSet.getString("job_id")%>&rec_job_ok=ok"><button><i class="fa fa-pencil"></i >Ok</button></a></center>
+					<div class="margin-top-10"></div>
+					<form method="post" action="Admin_rec_job_delete_email">
+					<input type="hidden" name="email" value="<%= resultSet.getString("email")%>"/>
+							<input type="hidden" name="id" value="<%= resultSet.getString("id")%>"/>
+							<input type="hidden" name="job_id" value="<%= resultSet.getString("job_id")%>"/>
+							<input type="hidden" name="job_title" value="<%= resultSet.getString("job_title")%>"/>
+							<input type="hidden" name="company_name" value="<%= resultSet.getString("company_name")%>"/>
+							<center><button type="submit" name="delete" ><i class="fa fa-remove"></i> Delete</button></center>
+			  		</form>
+			  		
+			  		
+			    </div>
+			    
+			    <!-- Third Tab -->
+			    <div class="app-tab-content"  id="three-1">
+					<i>Email:</i>
+					<span><%= resultSet.getString("email")%></span>
+
+					<i>Job title:</i>
+					<span><%= resultSet.getString("job_title")%></span>
+
+					<i>Address:</i>
+					<span><%= resultSet.getString("address")%></span>
+			    
+			    	<i>Job type:</i>
+					<span><%= resultSet.getString("job_type")%></span>
+			    	
+			    	<i>Category:</i>
+					<span><%= resultSet.getString("category")%></span>
+			    	
+			    	<i>Description:</i>
+					<span><%= resultSet.getString("description")%></span>
+			    	
+			    	<i>Test:</i>
+					<span><%= resultSet.getString("test")%></span>
+			    	
+			    	<i>Company name:</i>
+					<span><%= resultSet.getString("company_name")%></span>
+			    	
+			    	<i>Website:</i>
+					<span><%= resultSet.getString("website")%></span>
+			    	
+			    
+			    </div>
+
+			</div>
+
+			<!-- Footer -->
+			<div class="app-footer">
+
+				
+				<div class="clearfix"></div>
+
+			</div>
+		</div>
+<% 
 }
 con.close();
 } catch (Exception e) {
 e.printStackTrace();
 }
 %>
-
-				</table>
-
-				
-
-			</div>
-
-		</div>
-
-
+	</div>
+</div>
 		<div class="margin-top-100"></div>
 
 

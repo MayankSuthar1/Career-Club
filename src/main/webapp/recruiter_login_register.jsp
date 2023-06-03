@@ -101,6 +101,10 @@
 						<input type="submit" class="button" name="login" value="Login" />	
 					</p>
 		
+					<p class="lost_password">
+						<a href="recruiter_forgotpassword.jsp" >Lost Your Password?</a>
+					</p>
+		
 				</form>
 			</div>
 

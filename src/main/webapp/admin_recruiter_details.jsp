@@ -156,7 +156,7 @@ ResultSet resultSet = null;
 				<th><i class=""></i> Contact No.</th>
 				<th><i class=""></i> Recruiter Name</th>
 			</tr>
-					
+			</table>		
 			<!-- Profile -->
 					<%
 try{
@@ -171,8 +171,18 @@ while(resultSet.next()){
 	
     
 %>
+					<form method="post" action="Admin_rec_delete_email">
+					<table class="manage-table responsive-table">
+			<tr>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
 					<tr>
-											
+									
 						<td class="centered"><%= resultSet.getString("company_name")%></td>
 						<td class="centered"><%= resultSet.getString("company_email")%></td>
 						<td class="centered"><%= resultSet.getString("business_type")%></td>
@@ -181,18 +191,25 @@ while(resultSet.next()){
 						<td class="centered"><p><%= resultSet.getString("rec_name")%></p></td>
 						
 						
-						<td class="action"><a href="admin_rec_js_ok_delete_process.jsp?id=<%= resultSet.getString("id")%>&rec_ok=ok"><i class="fa fa-pencil"></i>Ok</a>
-						<a	href="admin_rec_js_ok_delete_process.jsp?id=<%= resultSet.getString("id")%>&rec_delete=ok" class="delete"><i class="fa fa-remove"></i> Delete</a></td>
-				
+						<td class="action">
+							<input type="hidden" name="email" value="<%= resultSet.getString("company_email")%>"/>
+							<input type="hidden" name="id" value="<%= resultSet.getString("id")%>"/>
+							<input type="hidden" name="rec_name" value="<%= resultSet.getString("rec_name")%>"/>
+							<a href="admin_rec_js_ok_delete_process.jsp?id=<%= resultSet.getString("id")%>&rec_ok=ok"><button><i class="fa fa-pencil"></i >Ok</button></a>
+							<button type="submit" name="delete" ><i class="fa fa-remove"></i> Delete</button>
+							<%-- <a	href="admin_rec_js_ok_delete_process.jsp?id=<%= resultSet.getString("id")%>&rec_delete=ok" class="delete"><i class="fa fa-remove"></i> Delete</a> --%>
+						</td>
 					</tr>
-				<% 
+					</table>
+					</form>
+<% 
 }
 con.close();
 } catch (Exception e) {
 e.printStackTrace();
 }
 %>
-		</table>
+	
 
 		
 
@@ -200,6 +217,115 @@ e.printStackTrace();
 
 </div>
 
+
+
+
+
+<div class="container">
+	
+	<!-- Applications -->
+	<div class="sixteen columns">
+	
+	<%
+try{
+con = DriverManager.getConnection(connectionUrl+database, userid, password);
+statement=con.createStatement();
+String sql ="select * from rec_profile where admin_checked =0 ";
+
+resultSet = statement.executeQuery(sql);
+
+if (!resultSet.isBeforeFirst()) {
+	%>
+	<div class="notification error closeable">
+	<p><span>Error!</span> there is no records in database.</p>
+	<a class="close" href="#"></a>
+</div>
+<%
+}
+while(resultSet.next()){
+
+	
+    
+%>
+		
+		<!-- Application #1 -->
+		<div class="application">
+			<div class="app-content">
+				
+				<!-- Name / Avatar -->
+				<div class="info">
+					<span><%=resultSet.getString("company_name")%></span>
+					
+				</div>
+				
+				<!-- Buttons -->
+				<div class="buttons">
+					<a href="#one-1" class="button gray app-link"><i class="fa fa-pencil"></i> Edit</a>
+					<a href="#three-1" class="button gray app-link"><i class="fa fa-plus-circle"></i> Show Details</a>
+				</div>
+				<div class="clearfix"></div>
+
+			</div>
+
+			<!--  Hidden Tabs -->
+			<div class="app-tabs">
+
+				<a href="#" class="close-tab button gray"><i class="fa fa-close"></i></a>
+				
+				<!-- First Tab -->
+			    <div class="app-tab-content" id="one-1">
+					<div class="clearfix"></div>
+					<center><a href="admin_rec_js_ok_delete_process.jsp?id=<%= resultSet.getString("id")%>&rec_ok=ok"><button><i class="fa fa-pencil"></i >Ok</button></a></center>
+					<div class="margin-top-10"></div>
+					<form method="post" action="Admin_rec_delete_email">
+					<input type="hidden" name="email" value="<%= resultSet.getString("company_email")%>"/>
+							<input type="hidden" name="id" value="<%= resultSet.getString("id")%>"/>
+							<input type="hidden" name="rec_name" value="<%= resultSet.getString("rec_name")%>"/>
+							<center><button type="submit" name="delete" ><i class="fa fa-remove"></i> Delete</button></center>
+			  		</form>
+			  		
+			  		
+			    </div>
+			    
+			    <!-- Third Tab -->
+			    <div class="app-tab-content"  id="three-1">
+					<i>Company email:</i>
+					<span><%= resultSet.getString("company_email")%></span>
+
+					<i>Business type:</i>
+					<span><%= resultSet.getString("business_type")%></span>
+
+					<i>Address:</i>
+					<span><%= resultSet.getString("address")%></span>
+			    
+			    	<i>Contact number:</i>
+					<span><%= resultSet.getString("con_num")%></span>
+			    	
+			    	<i>Recruiter name:</i>
+					<span><%= resultSet.getString("rec_name")%></span>
+			    	
+			    
+			    </div>
+
+			</div>
+
+			<!-- Footer -->
+			<div class="app-footer">
+
+				
+				<div class="clearfix"></div>
+
+			</div>
+		</div>
+<% 
+}
+con.close();
+} catch (Exception e) {
+e.printStackTrace();
+}
+%>
+	</div>
+</div>
 
 <div class="margin-top-100"></div>
 

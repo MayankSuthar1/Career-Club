@@ -61,7 +61,7 @@ public class Rec_reg extends HttpServlet {
 			// Get a writer pointer
 			// to display the successful result
 			PrintWriter out = response.getWriter();
-			RequestDispatcher rd=request.getRequestDispatcher("recruiter_login_register.jsp");  
+			RequestDispatcher rd=request.getRequestDispatcher("Rec_reg_email");  
 			rd.forward(request, response);
 		}
 		catch (Exception e) {

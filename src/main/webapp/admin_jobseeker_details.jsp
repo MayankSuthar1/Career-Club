@@ -137,27 +137,14 @@ byte[] imageData = null;
 
 		<!-- Content
 ================================================== -->
-		<div class="container">
 
-			<!-- Table -->
-			<div class="sixteen columns">
 
-				
-
-				<table class="manage-table responsive-table">
-				
-				
-					<tr>
-						<th><i class=""></i> Photo</th>
-						<th><i class=""></i> Name</th>
-						<th><i class=""></i> Email</th>
-						<th><i class=""></i> Phone no.</th>
-						<th><i class=""></i> Skills</th>
-						<th><i class=""></i> Location</th>
-					</tr>
-
-					<!-- Profile -->
-					<%
+<div class="container">
+	
+	<!-- Applications -->
+	<div class="sixteen columns">
+	
+	<%
 try{
 con = DriverManager.getConnection(connectionUrl+database, userid, password);
 statement=con.createStatement();
@@ -165,48 +152,111 @@ String sql ="select * from jobseeker_profile where admin_checked =0 ";
 
 resultSet = statement.executeQuery(sql);
 
+if (!resultSet.isBeforeFirst()) {
+	%>
+	<div class="notification error closeable">
+	<p><span>Error!</span> there is no records in database.</p>
+	<a class="close" href="#"></a>
+</div>
+<%
+}
+
+
 while(resultSet.next()){
 
 	Blob imageBlob = resultSet.getBlob("photo");
     
     
 %>
-					<tr>
-						<% if (imageBlob != null) {
+		
+		<!-- Application #1 -->
+		<div class="application">
+			<div class="app-content">
+				
+				<!-- Name / Avatar -->
+				<div class="info">
+				<% if (imageBlob != null) {
 						    	//displaying the logo from the database
 						      imageData = imageBlob.getBytes(1, (int)imageBlob.length());
 						
 						      // display the image using HTML
 						      out.println("<td><img src=\"data:image/jpeg;base64," + Base64.getEncoder().encodeToString(imageData) + "\" style=\"max-width: 250px; max-height: 250px;\"/></td>");
 						    }
-						%>					
-						<td class="centered"><%= resultSet.getString("name")%></td>
-						<td class="centered"><%= resultSet.getString("email")%></td>
-						<td class="centered"><%= resultSet.getString("phone_no")%></td>
-						<td class="centered"><%= resultSet.getString("skills")%></td>
-						<td class="centered"><%= resultSet.getString("location")%></td>
-						
-						
-						<td class="action"><a href="admin_rec_js_ok_delete_process.jsp?id=<%= resultSet.getString("id")%>&js_ok=ok"><i class="fa fa-pencil"></i>Ok</a>
-						<a	href="admin_rec_js_ok_delete_process.jsp?id=<%= resultSet.getString("id")%>&js_delete=ok" class="delete"><i class="fa fa-remove"></i> Delete</a></td>
+						%>
+					<span><%=resultSet.getString("name")%></span>
+					
+				</div>
 				
-					</tr>
-				<% 
+				<!-- Buttons -->
+				<div class="buttons">
+					<a href="#one-1" class="button gray app-link"><i class="fa fa-pencil"></i> Edit</a>
+					<a href="#three-1" class="button gray app-link"><i class="fa fa-plus-circle"></i> Show Details</a>
+				</div>
+				<div class="clearfix"></div>
+
+			</div>
+
+			<!--  Hidden Tabs -->
+			<div class="app-tabs">
+
+				<a href="#" class="close-tab button gray"><i class="fa fa-close"></i></a>
+				
+				<!-- First Tab -->
+			    <div class="app-tab-content" id="one-1">
+					<div class="clearfix"></div>
+					<center><a href="admin_rec_js_ok_delete_process.jsp?id=<%= resultSet.getString("id")%>&js_ok=ok"><button><i class="fa fa-pencil"></i>Ok</button></a></center>
+					<div class="margin-top-10"></div>
+					<form method="post" action="Admin_jobseeker_delete_email">
+					<input type="hidden" name="email" value="<%= resultSet.getString("email")%>"/>
+						<input type="hidden" name="id" value="<%= resultSet.getString("id")%>"/>
+						<input type="hidden" name="name" value="<%= resultSet.getString("name")%>"/>
+						<center><button type="submit" name="delete" ><i class="fa fa-remove"></i> Delete</button></center>
+						</form>
+			  		
+			  		
+			    </div>
+			    
+			    <!-- Third Tab -->
+			    <div class="app-tab-content"  id="three-1">
+					<i>Name :</i>
+					<span><%=resultSet.getString("name")%></span>
+
+					<i>Email :</i>
+					<span><%=resultSet.getString("email")%></span>
+
+					<i>Phone No. :</i>
+					<span><%=resultSet.getString("phone_no")%></span>
+			    
+			    	<i>Skills:</i>
+					<span><%=resultSet.getString("skills")%></span>
+			    	
+			    	<i>Location:</i>
+					<span><%=resultSet.getString("location")%></span>
+			    	
+			    	<i>Your self :</i>
+					<span><%=resultSet.getString("your_self")%></span>
+			    	
+			    </div>
+
+			</div>
+
+			<!-- Footer -->
+			<div class="app-footer">
+
+				
+				<div class="clearfix"></div>
+
+			</div>
+		</div>
+<% 
 }
 con.close();
 } catch (Exception e) {
 e.printStackTrace();
 }
 %>
-
-				</table>
-
-				
-
-			</div>
-
-		</div>
-
+	</div>
+</div>
 
 		<div class="margin-top-100"></div>
 
