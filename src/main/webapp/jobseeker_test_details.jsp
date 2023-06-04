@@ -66,7 +66,7 @@ byte[] imageData = null;
 
 		<!-- Logo -->
 		<div id="logo">
-			<h1><a href="jobseeker_index.html"><img src="jobseeker_look/images/logo.png" alt="Career Club" /></a></h1>
+			<h1><a href="jobseeker_index.jsp"><img src="jobseeker_look/images/logo.png" alt="Career Club" /></a></h1>
 		</div>
 
 		<!-- Menu -->
@@ -76,24 +76,22 @@ byte[] imageData = null;
 		
 				<li><a>Skill Test</a>
 					<ul>
-						<li><a href="jobseeker_test_find_page.html">Choose Test</a></li>
+						<li><a href="jobseeker_test_find_page.jsp">Choose Test</a></li>
 						
 					</ul>
 				</li>
 					
 				<li><a>Course</a>
 					<ul>
-						<li><a href="jobseeker_course.html">Buy a Course</a></li>
-						<li><a href="jobseeker_buyed_course.html">Your Courses</a></li>
+						<li><a href="jobseeker_course.jsp">Buy a Course</a></li>
+						<li><a href="jobseeker_buyed_course.jsp">Your Courses</a></li>
 						
 					</ul>
 					
 				</li>
 				<li><a>Profile</a>
 					<ul>
-						<li><a href="jobseeker_create_profile.html">Create Profile</a></li>
-						<li><a href="jobseeker_profile_manage.html">Edit Profile</a></li>
-						<li><a href="jobseeker_profile_manage.html">Delete Profile</a></li>
+						<li><a href="jobseeker_edit_profile.jsp">Edit Profile</a></li>
 					</ul>
 					
 				</li>
@@ -102,7 +100,7 @@ byte[] imageData = null;
 			
 		<!-- Logout -->
 			<ul class="responsive float-right">
-				<li><a href="index.html">Logout</a></li>
+				<li><a href="index.jsp">Logout</a></li>
 			</ul>
 
 
@@ -207,7 +205,7 @@ while(resultSet.next()){
 					<li>
 						<i class="fa fa-clock-o"></i>
 						<div>
-							<strong>Hours:</strong>
+							<strong>Test Time:</strong>
 							<span><%= resultSet.getString("time")%> mins</span>
 						</div>
 					</li>

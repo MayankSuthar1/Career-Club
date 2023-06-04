@@ -74,9 +74,7 @@ String outof = request.getParameter("outof");
 		</li>
 		<li><a>Profile</a>
 			<ul>
-				<li><a href="jobseeker_create_profile.jsp">Create Profile</a></li>
-				<li><a href="jobseeker_profile_manage.jsp">Edit Profile</a></li>
-				<li><a href="jobseeker_profile_manage.jsp">Delete Profile</a></li>
+				<li><a href="jobseeker_edit_profile.jsp">Edit Profile</a></li>
 			</ul>
 			
 		</li>	

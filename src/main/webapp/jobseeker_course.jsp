@@ -92,8 +92,7 @@ byte[] imageData = null;
 				</li>
 				<li><a>Profile</a>
 					<ul>
-
-						<li><a href="jobseeker_edit_manage.jsp">Edit Profile</a></li>
+						<li><a href="jobseeker_edit_profile.jsp">Edit Profile</a></li>
 					
 					</ul>
 					

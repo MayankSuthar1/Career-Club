@@ -122,7 +122,7 @@ byte[] imageData = null;
 	<div class="container">
 
 		<div class="sixteen columns">
-			<h2>Manage courses</h2>
+			<h2>Manage Tests</h2>
 			<nav id="breadcrumbs">
 				
 			</nav>

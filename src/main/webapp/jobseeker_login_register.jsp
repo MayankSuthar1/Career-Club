@@ -86,7 +86,7 @@
 					
 					<p class="form-row form-row-wide">
 						<label for="username">Email Address:</label>
-						<input type="text" class="input-text" name="email" id="username" value="" />
+						<input type="email" class="input-text" name="email" id="username" value="" />
 					</p>
 
 					<p class="form-row form-row-wide">

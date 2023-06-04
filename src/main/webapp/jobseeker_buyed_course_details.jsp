@@ -165,7 +165,6 @@ try{
 con = DriverManager.getConnection(connectionUrl+database, userid, password);
 statement=con.createStatement();
 String sql ="select * from jobseeker_buyed_course where course_id='" + course_id + "'";
-System.out.println(sql);
 resultSet = statement.executeQuery(sql);
 while(resultSet.next()){
 %>

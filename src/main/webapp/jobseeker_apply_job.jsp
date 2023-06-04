@@ -158,7 +158,11 @@ con = DriverManager.getConnection(connectionUrl+database, userid, password);
 statement=con.createStatement();
 String sql ="select * from rec_job where test='"+request.getParameter("title")+"'";
 
-resultSet = statement.executeQuery(sql);
+String sqli ="SELECT * FROM rec_job WHERE test='"+request.getParameter("title")+"' and job_id NOT IN (SELECT job_id FROM jobseeker_apply_job WHERE jobseeker_id = "+session.getAttribute("id")+")";
+
+resultSet = statement.executeQuery(sqli);
+
+
 
 while(resultSet.next()){
 	 Blob imageBlob = resultSet.getBlob("logo");

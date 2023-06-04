@@ -148,7 +148,7 @@ while(resultSet.next()){
 			<div class="form">
 				<h5>Business type</h5>
 				
- 				 <select name="business" id="business" >
+ 				 <select class="chosen-select-no-single" name="business" id="business" >
  				 <option value="<%=resultSet.getString("business_type") %>" selected ><%=resultSet.getString("business_type") %></option>
   					  <option value="Web development" >Web development</option>
  					  <option value="Software development">Software development</option>
@@ -167,7 +167,7 @@ while(resultSet.next()){
 			<!-- contact number -->
 			<div class="form">
 				<h5>Contact number</h5>
-				<input class="search-field" type="text" value="<%=resultSet.getString("con_num") %>" name="con_num"/>
+				<input class="search-field" type="number" value="<%=resultSet.getString("con_num") %>" name="con_num"/>
 			</div>
 		
 				<!-- contact name -->

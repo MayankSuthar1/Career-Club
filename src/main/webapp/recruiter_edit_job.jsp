@@ -93,7 +93,7 @@ byte[] imageData = null;
 				<li><a href="#">Profile</a>
 					<ul>
 						<li><a href="recruiter_edit_profile.jsp">Edit</a></li>
-						<li><a href="recruiter_edit_profile.jsp">Delete</a></li>
+						
 						
 					</ul>
 				</li>

@@ -131,7 +131,7 @@ while(resultSet.next()){
 			<div class="form">
 				<h5>Business type</h5>
 				
- 				 <select class="chosen-select" name="business" id="business">
+ 				 <select class="chosen-select-no-single" name="business" id="business">
   					  <option value="Web development">Web development</option>
  					  <option value="Software development">Software development</option>
   					  <option value="Application development">Application development</option>
@@ -149,7 +149,7 @@ while(resultSet.next()){
 			<!-- contact number -->
 			<div class="form">
 				<h5>Contact number</h5>
-				<input class="search-field" type="text" value="" name="con_num"/>
+				<input class="search-field" type="number" value="" name="con_num" max="12"/>
 			</div>
 		
 				<!-- contact name -->

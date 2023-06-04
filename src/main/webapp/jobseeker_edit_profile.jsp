@@ -94,7 +94,6 @@ byte[] imageData = null;
 				</li>
 				<li><a>Profile</a>
 					<ul>
-						<li><a href="jobseeker_create_profile.jsp">Create Profile</a></li>
 						<li><a href="jobseeker_edit_profile.jsp">Edit Profile</a></li>
 						
 					</ul>
@@ -131,7 +130,7 @@ byte[] imageData = null;
 	<div class="container">
 
 		<div class="sixteen columns">
-			<h2>Create Profile</h2>
+			<h2>Edit Profile</h2>
 		</div>
 
 	</div>
@@ -186,12 +185,12 @@ byte[] imageData = null;
 			<!-- Email -->
 			<div class="form">
 				<h5>Your Email <span style="color:red ;">*</span></h5>
-				<input class="search-field" type="text" placeholder="mail@example.com" value="<%= resultSet.getString("email")%>" name="email"/>
+				<input class="search-field" type="email" placeholder="mail@example.com" value="<%= resultSet.getString("email")%>" name="email"/>
 			</div>
 			<!-- Phone -->
 			<div class="form">
 				<h5>Your Phone No. <span style="color:red ;">*</span></h5>
-				<input class="search-field" type="text" placeholder="e.g. +915623467816" value="<%= resultSet.getString("phone_no")%>" name="num"/>
+				<input class="search-field" type="number" placeholder="e.g. +915623467816" value="<%= resultSet.getString("phone_no")%>" name="num"/>
 			</div>
 
 			<!-- Skill -->

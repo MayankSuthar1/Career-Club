@@ -48,7 +48,7 @@ public class Jobseeker_reg_email extends HttpServlet {
         		+ "\r\n"
         		+ "We are confident that our platform will meet your needs and expectations. Whether you are looking for information, connecting with like-minded individuals, or exploring new possibilities, Careerclub has you covered.\r\n"
         		+ "\r\n"
-        		+ "If you have any questions or need assistance, our support team is here to help. Simply reach out to us at careerclub2022@gmail.com , and we will be more than happy to assist you.\r\n"
+        		+ "If you have any questions or need assistance, our support team is here to help. Simply reach out to us at careerclub2023@gmail.com , and we will be more than happy to assist you.\r\n"
         		+ "\r\n"
         		+ "Thank you once again for joining us. We look forward to your active participation and contribution to our vibrant community.\r\n"
         		+ "\r\n"

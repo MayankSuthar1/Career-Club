@@ -127,7 +127,7 @@ byte[] imageData = null;
 			<div class="container">
 
 				<div class="sixteen columns">
-					<h2>Rec Job details</h2>
+					<h2>Recruiter Job details</h2>
 					<nav id="breadcrumbs"></nav>
 				</div>
 

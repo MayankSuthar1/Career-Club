@@ -85,7 +85,7 @@ ResultSet resultSet = null;
 				<li><a href="#">Profile</a>
 					<ul>
 						<li><a href="recruiter_edit_profile.jsp">Edit</a></li>
-						<li><a href="recruiter_edit_profile.jsp">Delete</a></li>
+					
 						
 					</ul>
 				</li>
@@ -177,7 +177,7 @@ while(resultSet.next()){
 			<!-- Job Type -->
 			<div class="form">
 				<h5>Job Type</h5>
-				<select data-placeholder="Full-Time" class="chosen-select-no-single" name="job_type">
+				<select data-placeholder="Choose Job-Type" class="chosen-select-no-single" name="job_type">
 					<option value="Full-Time">Full-Time</option>
 					<option value="Part-Time">Part-Time</option>
 					<option value="Internship">Internship</option>

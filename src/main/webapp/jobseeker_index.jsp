@@ -88,12 +88,11 @@ byte[] imageData = null;
 						String sqli ="select * from jobseeker_score where jobseeker_id='" + session.getAttribute("id") + "'";
 
 						resultSet = statement.executeQuery(sqli);
-						while(resultSet.next()){
-						if(resultSet != null){
+						
+						if(resultSet.next()){
 						%>
 						<li><a href="jobseeker_manage_result.jsp">Show results</a></li>
-						<%} 
-						}%>
+						<%}%>
 					</ul>
 				</li>
 					
@@ -252,7 +251,7 @@ e.printStackTrace();
 		</div>
 
 	</div>
-</div>
+
 
 
 

@@ -45,7 +45,7 @@ public class Admin_rec_job_delete_email extends HttpServlet {
         		+ "\r\n"
         		+ "I hope this email finds you well.\r\n"
         		+ "\r\n"
-        		+ "I am writing to inform you that the profile for the job listing you created at "+company_name+" has been temporarily removed by our system administrators due to an issue that we encountered. As a result, the applicant's profile associated with the job has been deleted.\r\n"
+        		+ "I am writing to inform you that the profile for the job listing you created at "+company_name+" has been removed by our system administrators due to an issue that we encountered. As a result, the applicant's profile associated with the job has been deleted.\r\n"
         		+ "\r\n"
         		+ "I kindly request you to inform the interested candidates about this situation and ask them to recreate their profiles on our platform. This will allow them to apply for the position once again.\r\n"
         		+ "\r\n"

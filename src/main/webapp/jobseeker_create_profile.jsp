@@ -124,12 +124,12 @@ ResultSet resultSet = null;
 			<!-- Email -->
 			<div class="form">
 				<h5>Your Email <span style="color:red ;">*</span></h5>
-				<input class="search-field" type="text" placeholder="mail@example.com" value="<%= resultSet.getString("email")%>" name="email"/>
+				<input class="search-field" type="email" placeholder="e.g. mail@example.com" value="<%= resultSet.getString("email")%>" name="email"/>
 			</div>
 			<!-- Phone -->
 			<div class="form">
 				<h5>Your Phone No. <span style="color:red ;">*</span></h5>
-				<input class="search-field" type="text" placeholder="e.g. +915623467816" value="" name="num"/>
+				<input class="search-field" type="number" placeholder="e.g. +915623467816" value="" name="num"/>
 			</div>
 
 			<!-- Skill -->
@@ -141,7 +141,7 @@ ResultSet resultSet = null;
 			<!-- Location -->
 			<div class="form">
 				<h5>Location <span style="color:red ;">*</span></h5>
-				<input class="search-field" type="text" placeholder="e.g. London, UK" value="" name="location"/>
+				<input class="search-field" type="text" placeholder="e.g. kalol, saij" value="" name="location"/>
 			</div>
 
 			<!-- Photo -->
