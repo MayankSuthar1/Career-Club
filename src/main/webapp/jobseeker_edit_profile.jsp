@@ -104,9 +104,7 @@ byte[] imageData = null;
 			</ul>
 			
 		<!-- Logout -->
-			<ul class="responsive float-right">
-				<li><a href="index.jsp">Logout</a></li>
-			</ul>
+			<form method="post" action="Logout"><ul class="responsive float-right"><li><button type="submit">Logout</button></li></ul></form>
 
 
 			
@@ -190,7 +188,7 @@ byte[] imageData = null;
 			<!-- Phone -->
 			<div class="form">
 				<h5>Your Phone No. <span style="color:red ;">*</span></h5>
-				<input class="search-field" type="number" placeholder="e.g. +915623467816" value="<%= resultSet.getString("phone_no")%>" name="num"/>
+				<input class="search-field" type="text" placeholder="e.g. +915623467816" pattern="^\+91[0-9]{10}$" value="<%= resultSet.getString("phone_no")%>" name="num"/>
 			</div>
 
 			<!-- Skill -->

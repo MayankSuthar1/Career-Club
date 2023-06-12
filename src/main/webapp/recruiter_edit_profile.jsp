@@ -86,9 +86,7 @@ ResultSet resultSet = null;
 	
 	</ul>
 				<!-- Logout -->
-				<ul class="responsive float-right">
-					<li><a href="index.jsp">Logout</a></li>
-				</ul>
+				<form method="post" action="Logout"><ul class="responsive float-right"><li><button type="submit">Logout</button></li></ul></form>
 			</nav>
 		
 		<!-- Navigation -->
@@ -167,7 +165,7 @@ while(resultSet.next()){
 			<!-- contact number -->
 			<div class="form">
 				<h5>Contact number</h5>
-				<input class="search-field" type="number" value="<%=resultSet.getString("con_num") %>" name="con_num"/>
+				<input class="search-field" type="text" value="<%=resultSet.getString("con_num") %>" placeholder="e.g. +915623467816" pattern="^\+91[0-9]{10}$" name="con_num"/>
 			</div>
 		
 				<!-- contact name -->

@@ -117,13 +117,7 @@ byte[] imageData = null;
 			</ul>
 			
 		<!-- Logout -->
-		<form method="post" action="Logout">
-			<ul class="responsive float-right">
-			
-				<li><button type="submit">Logout</button></li>
-				
-			</ul>
-			</form>
+		<form method="post" action="Logout"><ul class="responsive float-right"><li><button type="submit">Logout</button></li></ul></form>
 
 			
 

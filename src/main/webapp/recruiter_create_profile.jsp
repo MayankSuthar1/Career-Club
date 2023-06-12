@@ -149,7 +149,7 @@ while(resultSet.next()){
 			<!-- contact number -->
 			<div class="form">
 				<h5>Contact number</h5>
-				<input class="search-field" type="number" value="" name="con_num" max="12"/>
+				<input class="search-field" type="text" placeholder="e.g. +915623467816" pattern="^\+91[0-9]{10}$" value="" name="con_num" />
 			</div>
 		
 				<!-- contact name -->

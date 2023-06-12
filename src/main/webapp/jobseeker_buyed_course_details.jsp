@@ -105,9 +105,7 @@ String course_id = request.getParameter("course_id");
 			</ul>
 			
 		<!-- Logout -->
-			<ul class="responsive float-right">
-				<li><a href="logout.jsp">Logout</a></li>
-			</ul>
+			<form method="post" action="Logout"><ul class="responsive float-right"><li><button type="submit">Logout</button></li></ul></form>
 
 
 			

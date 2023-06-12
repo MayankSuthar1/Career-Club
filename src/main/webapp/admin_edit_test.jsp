@@ -101,9 +101,8 @@ byte[] imageData = null;
 	
 	</ul>
 		<!-- Logout -->
-		<ul class="responsive float-right">
-			<li><a href="index.jsp">Logout</a></li>
-		</ul>
+		<form method="post" action="Admin_logout"><ul class="responsive float-right"><li><button type="submit">Logout</button></li></ul></form>
+
 	</nav>
 		<!-- Navigation -->
 		<div id="mobile-navigation">
