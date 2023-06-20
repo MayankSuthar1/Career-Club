@@ -105,10 +105,13 @@
 				<img src="admin_look/images/banner-02.jpg" alt="">
 
 				<div class="caption title sfb" data-x="center" data-y="165" data-speed="400" data-start="800"  data-easing="easeOutExpo">
-					<p style="font-size:100px; color:white; margin-right:60px; margin-top:100px;">Welcome Admin</p>		
+					<h2>Welcome Admin</h2>	
 					
 				</div>
-
+			<div class="caption sfb" data-x="center" data-y="320" data-speed="400" data-start="1000" data-easing="easeOutExpo">
+					<a href="admin_create_course.jsp" class="slider-button">Create a course</a>
+					<a href="admin_create_test.jsp" class="slider-button">Create a test</a>
+				</div>
 				
 			</li>
 
