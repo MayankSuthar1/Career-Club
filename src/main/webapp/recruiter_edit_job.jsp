@@ -79,7 +79,7 @@ byte[] imageData = null;
 		<ul id="responsive">
 	
 		
-		<li><a>Jobs</a>
+		<li><a href="#">Jobs</a>
 			<ul>
 		<li><a href="recruiter_create_job.jsp">Create job</a></li>
 		<li><a href="recruiter_manage_jobs.jsp">Manage jobs</a></li>
@@ -101,7 +101,7 @@ byte[] imageData = null;
 		
 		</ul>
 					<!-- Logout -->
-				<form method="post" action="Logout"><ul class="responsive float-right"><li><button type="submit">Logout</button></li></ul></form>
+				<form method="post" action="Logout"><ul class="responsive float-right"><li><a><input type="submit" value="Logout"/></a></li></ul></form>
 			</nav>		<!-- Navigation -->
 		<div id="mobile-navigation">
 			<a href="#menu" class="menu-trigger"><i class="fa fa-reorder"></i> Menu</a>

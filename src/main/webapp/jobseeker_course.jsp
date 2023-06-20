@@ -75,14 +75,14 @@ byte[] imageData = null;
 			<ul id="responsive">
 
 		
-				<li><a>Skill Test</a>
+				<li><a href="#">Skill Test</a>
 					<ul>
 						<li><a href="jobseeker_test_find_page.jsp">Choose Test</a></li>
 						
 					</ul>
 				</li>
 			
-				<li><a>Course</a>
+				<li><a href="#">Course</a>
 					<ul>
 						<li><a href="jobseeker_course.jsp">Buy a Course</a></li>
 						<li><a href="jobseeker_buyed_course.jsp">Your Courses</a></li>
@@ -90,7 +90,7 @@ byte[] imageData = null;
 					</ul>
 					
 				</li>
-				<li><a>Profile</a>
+				<li><a href="#">Profile</a>
 					<ul>
 						<li><a href="jobseeker_edit_profile.jsp">Edit Profile</a></li>
 					
@@ -101,7 +101,7 @@ byte[] imageData = null;
 			</ul>
 			
 		<!-- Logout -->
-			<form method="post" action="Logout"><ul class="responsive float-right"><li><button type="submit">Logout</button></li></ul></form>
+			<form method="post" action="Logout"><ul class="responsive float-right"><li><a><input type="submit" value="Logout"/></a></li></ul></form>
 
 
 			

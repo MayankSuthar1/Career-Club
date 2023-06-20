@@ -71,15 +71,12 @@ ResultSet resultSet = null;
 			
 				<!-- Logout -->
 				
-									<form method="post" action="Logout"><ul class="responsive float-right"><li><button type="submit">Logout</button></li></ul></form>
+									<form method="post" action="Logout"><ul class="responsive float-right"><li><a><input type="submit" value="Logout"/></a></li></ul></form>
 
 				
 			</nav>
 		
-		<!-- Navigation -->
-		<div id="mobile-navigation">
-			<a href="#menu" class="menu-trigger"><i class="fa fa-reorder"></i> Menu</a>
-		</div>
+		
 
 	</div>
 </div>

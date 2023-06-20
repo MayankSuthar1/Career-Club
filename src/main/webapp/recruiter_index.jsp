@@ -88,7 +88,7 @@ ResultSet resultSet = null;
 	
 	</ul>
 		<!-- Logout -->
-		<form method="post" action="Logout"><ul class="responsive float-right"><li><button type="submit">Logout</button></li></ul></form>
+		<form method="post" action="Logout"><ul class="responsive float-right"><li><a><input type="submit" value="Logout"/></a></li></ul></form>
 	</nav>
 
 		<!-- Navigation -->
@@ -121,12 +121,18 @@ while(resultSet.next()){
 			<li data-fstransition="fade" data-transition="fade" data-slotamount="10" data-masterspeed="300">
 				<img src="recruiter_look/images/banner-02.jpg" alt="">
 
-				<div class="caption title sfb" data-x="center" data-y="165" data-speed="400" data-start="800"  data-easing="easeOutExpo">
-					<center><p style="font-size:150px; color:white; ">Welcome</p></center>
-					<center><p style="font-size:150px; color:white;  margin-top: 100px; "><%=resultSet.getString("rec_name") %></p></center>
+					<div class="caption title sfb" data-x="center" data-y="165" data-speed="400" data-start="800"  data-easing="easeOutExpo">
+					<h2>Welcome <%=resultSet.getString("rec_name") %></h2>
 				</div>
-
 				
+					<div class="caption text align-center sfb" data-x="center" data-y="270" data-speed="400" data-start="1200" data-easing="easeOutExpo">
+					<p>Career club is most trusted job board, connecting the world's <br> brightest minds with resume database loaded with talents.</p>
+				</div>
+		
+					<div class="caption sfb" data-x="center" data-y="370" data-speed="400" data-start="1600" data-easing="easeOutExpo">
+					<a href="recruiter_create_job.jsp" class="slider-button">Create job</a>
+				</div>
+			
 			</li>
 <%
 }

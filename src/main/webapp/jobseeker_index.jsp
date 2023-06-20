@@ -79,7 +79,7 @@ byte[] imageData = null;
 				
 
 				
-				<li><a>Skill Test</a>
+				<li><a href="#">Skill Test</a>
 					<ul>
 						<li><a href="jobseeker_test_find_page.jsp">Choose Test</a></li>
 						<%
@@ -97,7 +97,7 @@ byte[] imageData = null;
 				</li>
 					
 		
-				<li><a>Course</a>
+				<li><a href="#">Course</a>
 					<ul>
 						<li><a href="jobseeker_course.jsp">Buy a Course</a></li>
 						<li><a href="jobseeker_buyed_course.jsp">Your Courses</a></li>
@@ -105,7 +105,7 @@ byte[] imageData = null;
 					</ul>
 					
 				</li>
-				<li><a>Profile</a>
+				<li><a href="#">Profile</a>
 					<ul>
 						<li><a href="jobseeker_edit_profile.jsp">Edit Profile</a></li>
 						
@@ -117,7 +117,7 @@ byte[] imageData = null;
 			</ul>
 			
 		<!-- Logout -->
-		<form method="post" action="Logout"><ul class="responsive float-right"><li><button type="submit">Logout</button></li></ul></form>
+		<form method="post" action="Logout"><ul class="responsive float-right"><li><a><input type="submit" value="Logout"/></a></li></ul></form>
 
 			
 
@@ -155,15 +155,15 @@ while(resultSet.next()){
 
 				<div class="caption title sfb" data-x="center" data-y="165" data-speed="400" data-start="800"  data-easing="easeOutExpo">
 				
-					<h2>Welcome</h2>
-					<center><h2><%=resultSet.getString("name") %></h2></center>
+					<h2>Welcome <%=resultSet.getString("name") %></h2>
+					
 				</div>
 
-				<div class="caption text align-center sfb" data-x="center" data-y="260" data-speed="400" data-start="1200" data-easing="easeOutExpo">
+				<div class="caption text align-center sfb" data-x="center" data-y="220" data-speed="400" data-start="1200" data-easing="easeOutExpo">
 					<p>Here you can find your dream job with your skills.</p>
 				</div>
 
-				<div class="caption sfb" data-x="center" data-y="370" data-speed="400" data-start="1600" data-easing="easeOutExpo">
+				<div class="caption sfb" data-x="center" data-y="350" data-speed="400" data-start="1600" data-easing="easeOutExpo">
 					<a href="jobseeker_test_find_page.jsp" class="slider-button">Book a test</a>
 				</div>
 			</li>

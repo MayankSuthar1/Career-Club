@@ -69,7 +69,7 @@ return false;
 	<ul id="responsive">
 
 	
-		<li><a>Courses</a>
+		<li><a href="#">Courses</a>
 			<ul>
 			<li><a href="admin_create_course.jsp">Create course</a></li>
 		<li><a href="admin_manage_course.jsp">Manage course</a></li>
@@ -98,7 +98,7 @@ return false;
 	</ul>
 		<!-- Logout -->
 		
-		<form method="post" action="Admin_logout"><ul class="responsive float-right"><li><button type="submit">Logout</button></li></ul></form>
+		<form method="post" action="Admin_logout"><ul class="responsive float-right"><li><a><input type="submit" value="Logout"/></a></li></ul></form>
 
 		
 	</nav>
